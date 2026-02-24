@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_form_action_layout_item">
+    <sys_ux_form_action_layout_item action="INSERT_OR_UPDATE">
+        <action display_value="Suggest Action">2ce5b41c83faf6903be7a7d0deaad3f1</action>
+        <active>true</active>
+        <animate_icon>false</animate_icon>
+        <color>secondary</color>
+        <description/>
+        <icon/>
+        <item_type>action</item_type>
+        <label>Suggest Action</label>
+        <layout_group/>
+        <name>Suggest Action</name>
+        <order>100</order>
+        <overflow>true</overflow>
+        <sys_class_name>sys_ux_form_action_layout_item</sys_class_name>
+        <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
+        <sys_created_on>2026-01-28 08:27:42</sys_created_on>
+        <sys_id>60e5b41c83faf6903be7a7d0deaad3f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Suggest Action</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_ux_form_action_layout_item_60e5b41c83faf6903be7a7d0deaad3f8</sys_update_name>
+        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
+        <sys_updated_on>2026-01-28 08:27:42</sys_updated_on>
+        <table>incident</table>
+    </sys_ux_form_action_layout_item>
+</record_update>

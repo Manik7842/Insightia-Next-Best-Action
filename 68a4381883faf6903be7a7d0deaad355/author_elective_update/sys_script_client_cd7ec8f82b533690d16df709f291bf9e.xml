@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field/>
+        <global>true</global>
+        <isolate_script>false</isolate_script>
+        <messages/>
+        <name>Hide HTML Field Header and Footer</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+ var fieldName = 'x_ustgl_insighti_0_next_best_actions';
+
+    var hideHtmlExtras = function() {
+        // 1. Target the Zoom Buttons (usually in the main document)
+        var zoomButtons = document.querySelectorAll('div[id*="' + fieldName + '"] .sn-html-zoom-container, .icon-zoomin, .icon-zoomout');
+        zoomButtons.forEach(function(el) { el.style.display = 'none'; });
+
+        // 2. Target the Status Bar (the 'div' footer) inside the TinyMCE iframe
+        var iframe = document.querySelector('iframe[id*="' + fieldName + '"]');
+        if (iframe && iframe.contentDocument) {
+            var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+            var styleTag = innerDoc.getElementById('hide-footer-style') || innerDoc.createElement('style');
+            styleTag.id = 'hide-footer-style';
+            styleTag.innerHTML = '.tox-statusbar, .mce-statusbar, .tox-statusbar__path { display: none !important; }';
+            innerDoc.head.appendChild(styleTag);
+        }
+    };
+
+    // Run every 500ms for 5 seconds to catch late-loading editor elements
+    var counter = 0;
+    var timer = setInterval(function() {
+        hideHtmlExtras();
+        counter++;
+        if (counter > 10) clearInterval(timer); 
+    }, 500);
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-23 15:24:58</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>cd7ec8f82b533690d16df709f291bf9e</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Hide HTML Field Header and Footer</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_script_client_cd7ec8f82b533690d16df709f291bf9e</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-23 15:35:55</sys_updated_on>
+        <table>incident</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</application>
+        <file_path/>
+        <instance_id>878021351bbb7d1c19254089bd4bcba3</instance_id>
+        <instance_name>nowops</instance_name>
+        <name>sys_script_client_cd7ec8f82b533690d16df709f291bf9e</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field/&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;false&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;Hide HTML Field Header and Footer&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onLoad() {
+ var fieldName = 'x_ustgl_insighti_0_next_best_actions';
+
+    var hideHtmlExtras = function() {
+        // 1. Target the Zoom Buttons (usually in the main document)
+        var zoomButtons = document.querySelectorAll('div[id*="' + fieldName + '"] .sn-html-zoom-container, .icon-zoomin, .icon-zoomout');
+        zoomButtons.forEach(function(el) { el.style.display = 'none'; });
+
+        // 2. Target the Status Bar (the 'div' footer) inside the TinyMCE iframe
+        var iframe = document.querySelector('iframe[id*="' + fieldName + '"]');
+        if (iframe &amp;&amp; iframe.contentDocument) {
+            var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+            var styleTag = innerDoc.getElementById('hide-footer-style') || innerDoc.createElement('style');
+            styleTag.id = 'hide-footer-style';
+            styleTag.innerHTML = '.tox-statusbar, .mce-statusbar, .tox-statusbar__path { display: none !important; }';
+            innerDoc.head.appendChild(styleTag);
+        }
+    };
+
+    // Run every 500ms for 5 seconds to catch late-loading editor elements
+    var counter = 0;
+    var timer = setInterval(function() {
+        hideHtmlExtras();
+        counter++;
+        if (counter &gt; 10) clearInterval(timer); 
+    }, 500);
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;Prahlad.Gorantla&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-02-23 15:24:58&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;cd7ec8f82b533690d16df709f291bf9e&lt;/sys_id&gt;&lt;sys_mod_count&gt;6&lt;/sys_mod_count&gt;&lt;sys_name&gt;Hide HTML Field Header and Footer&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0"&gt;68a4381883faf6903be7a7d0deaad355&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Insightia (NBA)"&gt;68a4381883faf6903be7a7d0deaad355&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_cd7ec8f82b533690d16df709f291bf9e&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;Prahlad.Gorantla&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-02-23 15:35:55&lt;/sys_updated_on&gt;&lt;table&gt;incident&lt;/table&gt;&lt;type&gt;onLoad&lt;/type&gt;&lt;ui_type&gt;10&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1380310567</payload_hash>
+        <record_name>Hide HTML Field Header and Footer</record_name>
+        <reverted_from/>
+        <source>3735fb632b8bf650d16df709f291bf9b</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-23 15:35:55</sys_created_on>
+        <sys_id>b6311cf02b933690d16df709f291bfba</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c8b2491660000001</sys_recorded_at>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-23 15:35:55</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>36311cf0a3933690502ccdb165ec69b9</update_guid>
+        <update_guid_history>36311cf0a3933690502ccdb165ec69b9:-1380310567,f3e01070dc9336906716822504b8cde9:1250948375,97809c30569336908ed75e16edbfd30b:-182415033,851050309093369090244e734e8e6665:-961428752,afcf047cd55336901c5921cdf0c2de5d:241324147,f55f4cb80a533690300040ed6d545f82:-1497141015,12be0cf83a533690d09eacc5d0a5a824:-1388766376</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-23 16:28:23</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>189fa4f844424c9884c7353a8c178a40</sys_id>
+        <sys_metadata>cd7ec8f82b533690d16df709f291bf9e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Hide HTML Field Header and Footer</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_parent display_value="Incident">02d9e935ebb331104d66f624dad0cd7e</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_scope_delete display_value="">99772c5f9ccb49dea7863377c4777811</sys_scope_delete>
+        <sys_update_name>sys_script_client_cd7ec8f82b533690d16df709f291bf9e</sys_update_name>
+        <sys_update_version display_value="sys_script_client_cd7ec8f82b533690d16df709f291bf9e">b6311cf02b933690d16df709f291bfba</sys_update_version>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-23 16:28:23</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_context_config">
+    <sys_search_context_config action="DELETE">
+        <attachment_limit>5</attachment_limit>
+        <collapse_attachment>true</collapse_attachment>
+        <document_match_count>3</document_match_count>
+        <document_match_threshold>0.65</document_match_threshold>
+        <enable_exact_match>true</enable_exact_match>
+        <enable_semantic_search>false</enable_semantic_search>
+        <evam_definition/>
+        <filter_genius_results_by_search_source>false</filter_genius_results_by_search_source>
+        <genius_results_limit>1</genius_results_limit>
+        <hit_highlighting>false</hit_highlighting>
+        <log_signals_server_side>false</log_signals_server_side>
+        <name>Knowledge Portal Search Configuration</name>
+        <search_engine>ai_search</search_engine>
+        <search_profile display_value="Knowledge Portal Search Profile">d2a4fdb077e40210694782c79f5a99b3</search_profile>
+        <search_results_limit>10</search_results_limit>
+        <semantic_groupby>none</semantic_groupby>
+        <semantic_search_mode>keyword</semantic_search_mode>
+        <semantic_type>standard</semantic_type>
+        <show_disabled_facets>false</show_disabled_facets>
+        <show_tab_counts>true</show_tab_counts>
+        <spell_check>true</spell_check>
+        <suggestions_to_show_limit>10</suggestions_to_show_limit>
+        <sys_class_name>sys_search_context_config</sys_class_name>
+        <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
+        <sys_created_on>2026-02-11 07:26:17</sys_created_on>
+        <sys_id>0d1e60fc2b47f294d16df709f291bf58</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Knowledge Portal Search Configuration</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_search_context_config_0d1e60fc2b47f294d16df709f291bf58</sys_update_name>
+        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
+        <sys_updated_on>2026-02-11 07:26:17</sys_updated_on>
+        <ts_index_group/>
+        <view/>
+    </sys_search_context_config>
+    <sys_translated_text action="DELETE" query="documentkey=0d1e60fc2b47f294d16df709f291bf58"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</application>
+        <file_path/>
+        <instance_id>878021351bbb7d1c19254089bd4bcba3</instance_id>
+        <instance_name>nowops</instance_name>
+        <name>sys_search_context_config_0d1e60fc2b47f294d16df709f291bf58</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_context_config"><sys_search_context_config action="INSERT_OR_UPDATE"><attachment_limit>5</attachment_limit><collapse_attachment>true</collapse_attachment><document_match_count>3</document_match_count><document_match_threshold>0.65</document_match_threshold><enable_exact_match>true</enable_exact_match><enable_semantic_search>false</enable_semantic_search><evam_definition/><filter_genius_results_by_search_source>false</filter_genius_results_by_search_source><genius_results_limit>1</genius_results_limit><hit_highlighting>false</hit_highlighting><log_signals_server_side>false</log_signals_server_side><name>Knowledge Portal Search Configuration</name><search_engine>ai_search</search_engine><search_profile display_value="Knowledge Portal Search Profile">d2a4fdb077e40210694782c79f5a99b3</search_profile><search_results_limit>10</search_results_limit><semantic_groupby>none</semantic_groupby><semantic_search_mode>keyword</semantic_search_mode><semantic_type>standard</semantic_type><show_disabled_facets>false</show_disabled_facets><show_tab_counts>true</show_tab_counts><spell_check>true</spell_check><suggestions_to_show_limit>10</suggestions_to_show_limit><sys_class_name>sys_search_context_config</sys_class_name><sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by><sys_created_on>2026-02-11 07:26:17</sys_created_on><sys_id>0d1e60fc2b47f294d16df709f291bf58</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Knowledge Portal Search Configuration</sys_name><sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package><sys_policy/><sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope><sys_update_name>sys_search_context_config_0d1e60fc2b47f294d16df709f291bf58</sys_update_name><sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by><sys_updated_on>2026-02-11 07:26:17</sys_updated_on><ts_index_group/><view/></sys_search_context_config><sys_translated_text action="delete_multiple" query="documentkey=0d1e60fc2b47f294d16df709f291bf58"/></record_update>]]></payload>
+        <payload_hash>-315436629</payload_hash>
+        <record_name>Knowledge Portal Search Configuration</record_name>
+        <reverted_from/>
+        <source>3d1cd1662bb2b614d16df709f291bff0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
+        <sys_created_on>2026-02-11 07:26:17</sys_created_on>
+        <sys_id>191e24302b87f294d16df709f291bfbf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c4b97fc780000001</sys_recorded_at>
+        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
+        <sys_updated_on>2026-02-11 07:26:17</sys_updated_on>
+        <type>Search Application Configuration</type>
+        <update_guid>d11e24304387f29488b4c46cbaaea8be</update_guid>
+        <update_guid_history>d11e24304387f29488b4c46cbaaea8be:-315436629</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
+        <sys_created_on>2026-02-11 07:27:07</sys_created_on>
+        <sys_db_object display_value="" name="sys_search_context_config">sys_search_context_config</sys_db_object>
+        <sys_id>06a2ccf432b0436880faf7a0c283fa64</sys_id>
+        <sys_metadata>0d1e60fc2b47f294d16df709f291bf58</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Knowledge Portal Search Configuration</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_scope_delete display_value="">99772c5f9ccb49dea7863377c4777811</sys_scope_delete>
+        <sys_update_name>sys_search_context_config_0d1e60fc2b47f294d16df709f291bf58</sys_update_name>
+        <sys_update_version display_value="sys_search_context_config_0d1e60fc2b47f294d16df709f291bf58">191e24302b87f294d16df709f291bfbf</sys_update_version>
+        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
+        <sys_updated_on>2026-02-11 07:27:07</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

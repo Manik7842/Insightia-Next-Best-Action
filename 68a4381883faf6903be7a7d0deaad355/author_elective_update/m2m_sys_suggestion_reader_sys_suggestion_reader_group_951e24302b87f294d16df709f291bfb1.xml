@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sys_suggestion_reader_sys_suggestion_reader_group">
+    <m2m_sys_suggestion_reader_sys_suggestion_reader_group action="DELETE">
+        <order>200</order>
+        <reader_requested_fields/>
+        <reader_searchable_fields/>
+        <sys_class_name>m2m_sys_suggestion_reader_sys_suggestion_reader_group</sys_class_name>
+        <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
+        <sys_created_on>2026-02-11 07:26:17</sys_created_on>
+        <sys_id>951e24302b87f294d16df709f291bfb1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_suggestion_reader_group_id display_value="User History Reader Group for Knowledge Portal Search Configuration">d51e24302b87f294d16df709f291bf9d</sys_suggestion_reader_group_id>
+        <sys_suggestion_reader_id display_value="User History and Click Reader">f8495b9077210110be280d892c5a9986</sys_suggestion_reader_id>
+        <sys_update_name>m2m_sys_suggestion_reader_sys_suggestion_reader_group_951e24302b87f294d16df709f291bfb1</sys_update_name>
+        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
+        <sys_updated_on>2026-02-11 07:26:17</sys_updated_on>
+    </m2m_sys_suggestion_reader_sys_suggestion_reader_group>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</application>
+        <file_path/>
+        <instance_id>878021351bbb7d1c19254089bd4bcba3</instance_id>
+        <instance_name>nowops</instance_name>
+        <name>m2m_sys_suggestion_reader_sys_suggestion_reader_group_951e24302b87f294d16df709f291bfb1</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sys_suggestion_reader_sys_suggestion_reader_group"><m2m_sys_suggestion_reader_sys_suggestion_reader_group action="INSERT_OR_UPDATE"><order>200</order><reader_requested_fields/><reader_searchable_fields/><sys_class_name>m2m_sys_suggestion_reader_sys_suggestion_reader_group</sys_class_name><sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by><sys_created_on>2026-02-11 07:26:17</sys_created_on><sys_id>951e24302b87f294d16df709f291bfb1</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package><sys_policy/><sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope><sys_suggestion_reader_group_id display_value="User History Reader Group for Knowledge Portal Search Configuration">d51e24302b87f294d16df709f291bf9d</sys_suggestion_reader_group_id><sys_suggestion_reader_id display_value="User History and Click Reader">f8495b9077210110be280d892c5a9986</sys_suggestion_reader_id><sys_update_name>m2m_sys_suggestion_reader_sys_suggestion_reader_group_951e24302b87f294d16df709f291bfb1</sys_update_name><sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by><sys_updated_on>2026-02-11 07:26:17</sys_updated_on></m2m_sys_suggestion_reader_sys_suggestion_reader_group></record_update>]]></payload>
+        <payload_hash>1208732890</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>3d1cd1662bb2b614d16df709f291bff0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
+        <sys_created_on>2026-02-11 07:26:17</sys_created_on>
+        <sys_id>591e24302b87f294d16df709f291bfb4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c4b97fc100000001</sys_recorded_at>
+        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
+        <sys_updated_on>2026-02-11 07:26:17</sys_updated_on>
+        <type>Suggestion Reader and Suggestion Reader </type>
+        <update_guid>151e24305187f2949afc97874b72bfb3</update_guid>
+        <update_guid_history>151e24305187f2949afc97874b72bfb3:1208732890</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">654eac302b87f294d16df709f291bfe0</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
+        <sys_created_on>2026-02-11 07:27:07</sys_created_on>
+        <sys_db_object display_value="" name="m2m_sys_suggestion_reader_sys_suggestion_reader_group">m2m_sys_suggestion_reader_sys_suggestion_reader_group</sys_db_object>
+        <sys_id>059a33f90b4d4417806920c7fafdb531</sys_id>
+        <sys_metadata>951e24302b87f294d16df709f291bfb1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_scope_delete display_value="">99772c5f9ccb49dea7863377c4777811</sys_scope_delete>
+        <sys_update_name>m2m_sys_suggestion_reader_sys_suggestion_reader_group_951e24302b87f294d16df709f291bfb1</sys_update_name>
+        <sys_update_version display_value="m2m_sys_suggestion_reader_sys_suggestion_reader_group_951e24302b87f294d16df709f291bfb1">591e24302b87f294d16df709f291bfb4</sys_update_version>
+        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
+        <sys_updated_on>2026-02-11 07:27:07</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
