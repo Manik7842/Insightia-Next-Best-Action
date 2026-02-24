@@ -182,7 +182,18 @@ generateNextBestAction.prototype = Object.extendsObject(global.AbstractAjaxProce
 
             // Add state of the incident to the prompt
             var gptPrompt = "Based on the following incident details within the ITSM framework, what should be the next step to resolve or escalate effectively? \n\n";
-            gptPrompt += "Insdtructions \n  1. Do not use # to separate points the response should be in well structured format to be displayed in a serviceNow form field \n 2. Keep the steps short and simple \n 3. Only provide the Next steps do not additionally add any headings \n 4. Make it point wise \n  4. If any Kb Article is referenced say the article name in brackets if not inform that too";
+            gptPrompt += "Instructions:\n" +
+                "1. The response MUST be strictly numbered starting from 1.\n" +
+                "2. Use exact format: 1. Step description\n" +
+                "3. Do NOT use '-', '*', bullets, or any other symbols.\n" +
+                "4. Do NOT use headings or titles.\n" +
+                "5. Keep each step short and simple.\n" +
+                "6. Only provide the next steps.\n" +
+                "7. Analyze both the provided KB Articles and past Incidents before suggesting steps.\n" +
+                "8. Reference a KB Article number in brackets only if it is directly relevant (e.g., KB0010235).\n" +
+                "9. Reference a past Incident number in brackets only if it is directly relevant (e.g., INC0012345).\n" +
+                "10. If both a KB and an Incident are relevant, reference both appropriately.\n" +
+                "11. Do NOT repeat the same KB or Incident number in multiple steps unless absolutely necessary.\n\n";
             gptPrompt += "Incident:\n";
             gptPrompt += "Short Description: " + gr_inc.short_description + "\n";
             gptPrompt += "Description: " + gr_inc.description + "\n";
@@ -511,13 +522,13 @@ generateNextBestAction.prototype = Object.extendsObject(global.AbstractAjaxProce
         <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
         <sys_created_on>2026-01-28 08:32:30</sys_created_on>
         <sys_id>76f6705c83faf6903be7a7d0deaad33f</sys_id>
-        <sys_mod_count>83</sys_mod_count>
+        <sys_mod_count>87</sys_mod_count>
         <sys_name>generateNextBestAction</sys_name>
         <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
         <sys_policy/>
         <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
         <sys_update_name>sys_script_include_76f6705c83faf6903be7a7d0deaad33f</sys_update_name>
         <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
-        <sys_updated_on>2026-02-23 17:04:29</sys_updated_on>
+        <sys_updated_on>2026-02-24 04:27:08</sys_updated_on>
     </sys_script_include>
 </record_update>
