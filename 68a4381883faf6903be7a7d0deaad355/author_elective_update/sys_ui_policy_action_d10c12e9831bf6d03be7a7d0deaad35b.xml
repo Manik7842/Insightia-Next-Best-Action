@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="DELETE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>x_ustgl_insighti_0_next_best_action</field>
+        <field_message/>
+        <field_message_type>none</field_message_type>
+        <mandatory>ignore</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-26 09:38:05</sys_created_on>
+        <sys_id>d10c12e9831bf6d03be7a7d0deaad35b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_ustgl_insighti_0_next_best_action</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_ui_policy_action_d10c12e9831bf6d03be7a7d0deaad35b</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-26 09:38:05</sys_updated_on>
+        <table>task</table>
+        <ui_policy display_value="Show Next Best Action when data exists">01bb9e69831bf6d03be7a7d0deaad386</ui_policy>
+        <value/>
+        <value_action>ignore</value_action>
+        <visible>true</visible>
+    </sys_ui_policy_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</application>
+        <file_path/>
+        <instance_id>878021351bbb7d1c19254089bd4bcba3</instance_id>
+        <instance_name>nowops</instance_name>
+        <name>sys_ui_policy_action_d10c12e9831bf6d03be7a7d0deaad35b</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>ignore</disabled><field>x_ustgl_insighti_0_next_best_action</field><field_message/><field_message_type>none</field_message_type><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>Prahlad.Gorantla</sys_created_by><sys_created_on>2026-02-26 09:38:05</sys_created_on><sys_id>d10c12e9831bf6d03be7a7d0deaad35b</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_ustgl_insighti_0_next_best_action</sys_name><sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package><sys_policy/><sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope><sys_update_name>sys_ui_policy_action_d10c12e9831bf6d03be7a7d0deaad35b</sys_update_name><sys_updated_by>Prahlad.Gorantla</sys_updated_by><sys_updated_on>2026-02-26 09:38:05</sys_updated_on><table>task</table><ui_policy display_value="Show Next Best Action when data exists">01bb9e69831bf6d03be7a7d0deaad386</ui_policy><value/><value_action>ignore</value_action><visible>true</visible></sys_ui_policy_action></record_update>]]></payload>
+        <payload_hash>1865760028</payload_hash>
+        <record_name>x_ustgl_insighti_0_next_best_action</record_name>
+        <reverted_from/>
+        <source>89fbd7f02b9fb690d16df709f291bf11</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-26 09:38:05</sys_created_on>
+        <sys_id>4a1c56e9831bf6d03be7a7d0deaad322</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c995008b80000001</sys_recorded_at>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-26 09:38:05</sys_updated_on>
+        <type>UI Policy Action</type>
+        <update_guid>ce1cda29591bf6d00e046688187bd9c8</update_guid>
+        <update_guid_history>ce1cda29591bf6d00e046688187bd9c8:1865760028</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-26 16:31:32</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_policy_action">sys_ui_policy_action</sys_db_object>
+        <sys_id>4dedecf011d44224bf4ebf11f6b37b90</sys_id>
+        <sys_metadata>d10c12e9831bf6d03be7a7d0deaad35b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_ustgl_insighti_0_next_best_action</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_scope_delete display_value="">99772c5f9ccb49dea7863377c4777811</sys_scope_delete>
+        <sys_update_name>sys_ui_policy_action_d10c12e9831bf6d03be7a7d0deaad35b</sys_update_name>
+        <sys_update_version display_value="sys_ui_policy_action_d10c12e9831bf6d03be7a7d0deaad35b">4a1c56e9831bf6d03be7a7d0deaad322</sys_update_version>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-26 16:31:32</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="ais_search_profile">
+    <ais_search_profile action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <creator_source/>
+        <description/>
+        <exclude_from_evaluation>false</exclude_from_evaluation>
+        <genius_result_assembly/>
+        <label>Change Request Search Profile</label>
+        <name>x_ustgl_insighti_0_change_request_search_profile</name>
+        <publish_id>967793f6-a094-4ec2-af3e-92b43b611f76</publish_id>
+        <qna_model_id>bert-qa-model-1.1.6</qna_model_id>
+        <state>PUBLISHED</state>
+        <sys_class_name>ais_search_profile</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-28 17:34:00</sys_created_on>
+        <sys_id>fc1c9e5e83df72143be7a7d0deaad35b</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Change Request Search Profile</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>ais_search_profile_fc1c9e5e83df72143be7a7d0deaad35b</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2026-02-28 18:23:15</sys_updated_on>
+    </ais_search_profile>
+</record_update>

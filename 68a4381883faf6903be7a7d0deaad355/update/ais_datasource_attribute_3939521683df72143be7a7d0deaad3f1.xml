@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="ais_datasource_attribute">
+    <ais_datasource_attribute action="INSERT_OR_UPDATE">
+        <attribute display_value="index_attachments">2dd8f14753320010ffaaddeeff7b1293</attribute>
+        <datasource display_value="Change Request Index Source">ccf89ed283df72143be7a7d0deaad3f3</datasource>
+        <source>change_request</source>
+        <sys_class_name>ais_datasource_attribute</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-28 17:20:57</sys_created_on>
+        <sys_id>3939521683df72143be7a7d0deaad3f1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>ais_datasource_attribute_3939521683df72143be7a7d0deaad3f1</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-28 17:20:57</sys_updated_on>
+        <value>false</value>
+    </ais_datasource_attribute>
+</record_update>

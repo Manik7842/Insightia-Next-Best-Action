@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element attributes="all_tables.query_hints=true,email_client=true,hasWorkflow=true,live_feed=true,query_hints=true,wwna_skill_id=c5870faa20e22110f877d3d1bc36dd87" audit="true" db_object_id="02d9e935ebb331104d66f624dad0cd7e" extends="task" label="Incident" max_length="40" name="incident" text_index="true" type="collection">
         <element attributes="edge_encryption_enabled=true&#13;&#10;" label="Next Best Action" max_length="4000" name="x_ustgl_insighti_0_next_best_actions" read_only="true" type="html"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;&#9;// Add your code here&#13;&#10;&#9;return '';  // return the calculated value&#13;&#10;&#13;&#10;})(current);" label="Next Best Action" max_length="8000" name="x_ustgl_insighti_0_next_best_action" read_only="true" type="html"/>
     </element>
 </database>

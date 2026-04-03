@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_filter">
+    <sys_search_filter action="DELETE">
+        <active>true</active>
+        <ais_search_source display_value="Task Search">6e928c4d2b57f690d16df709f291bffe</ais_search_source>
+        <label>Task</label>
+        <name>Task Search</name>
+        <order>100</order>
+        <search_context_config display_value="">15681c852b9bf690d16df709f291bff9</search_context_config>
+        <sys_class_name>sys_search_filter</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-24 10:47:29</sys_created_on>
+        <sys_id>d3c810c52b9bf690d16df709f291bf89</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Task Search</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_search_filter_d3c810c52b9bf690d16df709f291bf89</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-24 10:47:29</sys_updated_on>
+    </sys_search_filter>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</application>
+        <file_path/>
+        <instance_id>878021351bbb7d1c19254089bd4bcba3</instance_id>
+        <instance_name>nowops</instance_name>
+        <name>sys_search_filter_d3c810c52b9bf690d16df709f291bf89</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_filter"><sys_search_filter action="INSERT_OR_UPDATE"><active>true</active><ais_search_source display_value="Task Search">6e928c4d2b57f690d16df709f291bffe</ais_search_source><label>Task</label><name>Task Search</name><order>100</order><search_context_config display_value="">15681c852b9bf690d16df709f291bff9</search_context_config><sys_class_name>sys_search_filter</sys_class_name><sys_created_by>Prahlad.Gorantla</sys_created_by><sys_created_on>2026-02-24 10:47:29</sys_created_on><sys_id>d3c810c52b9bf690d16df709f291bf89</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Task Search</sys_name><sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package><sys_policy/><sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope><sys_update_name>sys_search_filter_d3c810c52b9bf690d16df709f291bf89</sys_update_name><sys_updated_by>Prahlad.Gorantla</sys_updated_by><sys_updated_on>2026-02-24 10:47:29</sys_updated_on></sys_search_filter></record_update>]]></payload>
+        <payload_hash>951797750</payload_hash>
+        <record_name>Task Search</record_name>
+        <reverted_from/>
+        <source>89fbd7f02b9fb690d16df709f291bf11</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-24 10:47:29</sys_created_on>
+        <sys_id>dbc81c892b9bf690d16df709f291bfcd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19c8f42dc5d0000001</sys_recorded_at>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-24 10:47:29</sys_updated_on>
+        <type>Search Source Facet Bucket</type>
+        <update_guid>97c81c89509bf690c266c320f7c23fcc</update_guid>
+        <update_guid_history>97c81c89509bf690c266c320f7c23fcc:951797750</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-26 06:08:00</sys_created_on>
+        <sys_db_object display_value="" name="sys_search_filter">sys_search_filter</sys_db_object>
+        <sys_id>5b5ce4cc10ca4b538642b1ba408e5511</sys_id>
+        <sys_metadata>d3c810c52b9bf690d16df709f291bf89</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Task Search</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_scope_delete display_value="">99772c5f9ccb49dea7863377c4777811</sys_scope_delete>
+        <sys_update_name>sys_search_filter_d3c810c52b9bf690d16df709f291bf89</sys_update_name>
+        <sys_update_version display_value="sys_search_filter_d3c810c52b9bf690d16df709f291bf89">dbc81c892b9bf690d16df709f291bfcd</sys_update_version>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-26 06:08:00</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

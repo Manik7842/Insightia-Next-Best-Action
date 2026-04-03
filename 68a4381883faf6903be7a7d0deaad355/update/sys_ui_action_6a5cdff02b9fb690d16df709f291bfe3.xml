@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name>NBA_generator</action_name>
+        <active>true</active>
+        <client>true</client>
+        <client_script_v2><![CDATA[function onClick() {
+    g_form.setValue('x_ustgl_insighti_0_next_best_action', '');
+    g_form.addInfoMessage('Generating Next Best Action...');
+    var ga = new GlideAjax('x_ustgl_insighti_0.NBAGeneration');
+    ga.addParam('sysparm_name', 'generateNBA');
+    ga.addParam('sysparm_sys_id', g_form.getUniqueValue());
+    ga.addParam('sysparm_table', g_form.getTableName());
+
+
+    ga.getXMLAnswer(function(response) {
+
+        g_form.clearMessages();
+        if (!response) {
+            g_form.addErrorMessage('Failed to generate Next Best Action');
+            return;
+        }
+
+        if (response.startsWith("ERROR:")) {
+            g_form.addErrorMessage(response.replace("ERROR:", ""));
+            return;
+        }
+
+        g_form.setValue('x_ustgl_insighti_0_next_best_action', response);
+
+        // Save (Workspace + Classic)
+        if (typeof g_form.saveRecord === 'function') {
+            g_form.saveRecord();
+        } else {
+            g_form.save();
+        }
+        g_form.addInfoMessage('Next Best Action generated successfully');
+
+    });
+}]]></client_script_v2>
+        <comments/>
+        <condition>['incident','problem','change_request','sc_task'].includes(current.getTableName()) &amp;&amp; !current.isNewRecord() &amp;&amp; !['Closed','Resolved','Closed Complete'].includes(current.state.getDisplayValue())</condition>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_button_v2>true</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>true</form_menu_button_v2>
+        <form_style/>
+        <format_for_configurable_workspace>true</format_for_configurable_workspace>
+        <hint/>
+        <isolate_script>true</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Suggest Best Action</name>
+        <onclick>onClick()</onclick>
+        <order>100</order>
+        <script><![CDATA[function onClick() {
+    g_form.setValue('x_ustgl_insighti_0_next_best_action', '');
+    g_form.addInfoMessage('Generating Next Best Action...');
+    var ga = new GlideAjax('x_ustgl_insighti_0.NBAGeneration');
+    ga.addParam('sysparm_name', 'generateNBA');
+    ga.addParam('sysparm_sys_id', g_form.getUniqueValue());
+    ga.addParam('sysparm_table', g_form.getTableName());
+
+
+    ga.getXMLAnswer(function(response) {
+
+        g_form.clearMessages();
+        if (!response) {
+            g_form.addErrorMessage('Failed to generate Next Best Action');
+            return;
+        }
+
+        if (response.startsWith("ERROR:")) {
+            g_form.addErrorMessage(response.replace("ERROR:", ""));
+            return;
+        }
+
+        g_form.setValue('x_ustgl_insighti_0_next_best_action', response);
+
+        // Save (Workspace + Classic)
+        if (typeof g_form.saveRecord === 'function') {
+            g_form.saveRecord();
+        } else {
+            g_form.save();
+        }
+        g_form.addInfoMessage('Next Best Action generated successfully');
+
+    });
+}]]></script>
+        <show_insert>true</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-24 06:25:45</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>6a5cdff02b9fb690d16df709f291bfe3</sys_id>
+        <sys_mod_count>27</sys_mod_count>
+        <sys_name>Suggest Best Action</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_ui_action_6a5cdff02b9fb690d16df709f291bfe3</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-03-13 08:36:28</sys_updated_on>
+        <table>task</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

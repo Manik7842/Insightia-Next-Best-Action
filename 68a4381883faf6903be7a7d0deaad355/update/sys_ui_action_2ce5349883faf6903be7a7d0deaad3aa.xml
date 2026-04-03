@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
     <sys_ui_action action="INSERT_OR_UPDATE">
         <action_name>generate_nba</action_name>
-        <active>true</active>
+        <active>false</active>
         <client>true</client>
         <client_script_v2><![CDATA[function onClick() {
 
@@ -108,15 +108,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>2ce5349883faf6903be7a7d0deaad3aa</sys_id>
-        <sys_mod_count>39</sys_mod_count>
+        <sys_mod_count>42</sys_mod_count>
         <sys_name>Suggest Action</sys_name>
         <sys_overrides/>
         <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
         <sys_policy/>
         <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
         <sys_update_name>sys_ui_action_2ce5349883faf6903be7a7d0deaad3aa</sys_update_name>
-        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
-        <sys_updated_on>2026-02-24 06:49:27</sys_updated_on>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-03-03 12:22:29</sys_updated_on>
         <table>incident</table>
         <ui11_compatible>false</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

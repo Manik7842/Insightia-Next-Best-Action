@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="5ed35744eb5eaa104d66f624dad0cdd8" label="Ar CMDB Data Management Task" max_length="40" name="ar_cmdb_data_management_task" type="collection">
+        <element label="Insighti 0 next best action" max_length="16777215" name="x_ustgl_insighti_0_next_best_action" type="html"/>
+    </element>
+</database>

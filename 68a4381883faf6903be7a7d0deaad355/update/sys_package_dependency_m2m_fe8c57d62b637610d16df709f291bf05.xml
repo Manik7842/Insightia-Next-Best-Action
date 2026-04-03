@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
+    <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
+        <dependency display_value="Problem Management" source="com.snc.problem">edd9a935ebb331104d66f624dad0cde8</dependency>
+        <min_version>1.0.0</min_version>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-03-13 08:30:49</sys_created_on>
+        <sys_id>fe8c57d62b637610d16df709f291bf05</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-03-13 08:30:49</sys_updated_on>
+    </sys_package_dependency_m2m>
+</record_update>

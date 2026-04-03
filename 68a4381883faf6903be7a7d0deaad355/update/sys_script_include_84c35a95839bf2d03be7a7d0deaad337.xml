@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>false</active>
+        <api_name>x_ustgl_insighti_0.NBAGeneration</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>NBAGeneration</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var NBAGeneration = Class.create();
+NBAGeneration.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+    generateNBA: function() {
+        var recSysid = this.getParameter('sysparm_sys_id');
+        var tableName = this.getParameter('sysparm_table');
+        var finalText = '';
+        if (recSysid && tableName) {
+            var gr_record = new GlideRecordSecure(tableName);
+            if (gr_record.get(recSysid)) {
+                var short_description = gr_record.isValidField('short_description') ?
+                    (gr_record.getValue('short_description') || '').trim() : '';
+                var description = gr_record.isValidField('description') ?
+                    (gr_record.getValue('description') || '').trim() : '';
+                finalText = short_description && description ? (short_description.toLowerCase() === description.toLowerCase() ? short_description : short_description + ' ' + description) : (short_description || description);
+                if (!this.validateTaskContent(finalText)) {
+                    return "ERROR: There is not enough issue information to generate NBA. Please provide clearer issue details.";
+                }
+            }
+        }
+        var kbPayload = JSON.stringify({
+            kbSearchResourceSysId: '3f1dd0320a0a0b99000a53f7604a2ef9',
+            kbSearchApplicationConfigSysId: '2e74f9b077e40210694782c79f5a99e8',
+            searchTerm: finalText
+        });
+
+        var recPayload = JSON.stringify({
+            recSearchResourceSysId: '6e928c4d2b57f690d16df709f291bffe',
+            recSearchApplicationConfigSysId: '15681c852b9bf690d16df709f291bff9',
+            searchTerm: finalText
+        });
+
+        var kbSearchResults = this.getTopResults(kbPayload, 3);
+        var recordSearchResults = this.getTopResults(recPayload, 3);
+
+        var kbContent = this.formatKBResults(kbSearchResults);
+        var recordContent = this.formatRecordResults(recordSearchResults, tableName);
+
+        // ]]>🔹<![CDATA[ Send everything to LLM
+        return this.callLLM(gr_record, kbContent, recordContent);
+
+
+
+
+    },
+
+    //call to AI Search and getting the results
+    executeSearch: function(payload) {
+        var aiSearchResults = new sn_ws.RESTMessageV2();
+        aiSearchResults.setEndpoint(gs.getProperty('NowURL'));
+        aiSearchResults.setHttpMethod("POST");
+        aiSearchResults.setRequestHeader("Content-Type", "application/json");
+        aiSearchResults.setRequestHeader("Accept", "application/json");
+        aiSearchResults.setRequestHeader("Authorization", "Basic " + GlideStringUtil.base64Encode(gs.aiSearchResults('auth')));
+        aiSearchResults.setRequestBody(payload);
+        var aiResponse = aiSearchResults.execute();
+        var aiResponseBody = aiResponse.getBody();
+        if (!aiResponseBody) {
+            return [];
+        }
+        var aiResult = JSON.parse(aiResponseBody);
+        return (aiResult.result && aiResult.result.search && aiResult.result.search.searchResults) ?
+            aiResult.result.search.searchResults : [];
+    },
+
+    getTopResults: function(payload, limit) {
+
+        var results = this.executeSearch(payload) || [];
+
+        results.sort(function(a, b) {
+            return (b.score || 0) - (a.score || 0);
+        });
+
+        return results.slice(0, limit);
+    },
+
+    formatRecordResults: function(results, tableName) {
+
+        var recordContent = '';
+
+        if (results && results.length > 0) {
+
+            recordContent = "Relevant Past Records:\n\n";
+
+            for (var b = 0; b < results.length; b++) {
+
+                var rec = results[b];
+                var recNumber = "";
+                var recSysId = "";
+
+                // ]]>🔹<![CDATA[ Extract sys_id and number from AI Search columns
+                if (rec.columns) {
+                    for (var j = 0; j < rec.columns.length; j++) {
+
+                        var recField = rec.columns[j];
+
+                        if (recField.fieldName === "sys_id")
+                            recSysId = recField.value;
+
+                        if (recField.fieldName === "number")
+                            recNumber = recField.value;
+                    }
+                }
+
+                if (recSysId) {
+
+                    var grRec = new GlideRecordSecure(tableName);
+                    if (grRec.get(recSysId)) {
+
+                        var recDescription = grRec.getValue('description') || '';
+                        var recCloseNotes = grRec.isValidField('close_notes') ?
+                            (grRec.getValue('close_notes') || '') : '';
+
+                        // ]]>🔹<![CDATA[ Fetch journal entries
+                        var journals = [];
+                        var jGr = new GlideRecordSecure('sys_journal_field');
+                        jGr.addQuery('element_id', recSysId);
+                        jGr.orderBy('sys_created_on');
+                        jGr.query();
+
+                        while (jGr.next()) {
+                            var entry = '[' + jGr.getValue('element') + ' - ' + jGr.getDisplayValue('sys_created_on') + ']: ' + (jGr.getValue('value') || '');
+                            journals.push(entry);
+                        }
+
+                        var recJournals = journals.join('\n');
+
+                        recordContent += "Record #" + (b + 1) + ":\n";
+                        recordContent += "Number: " + recNumber + "\n";
+                        recordContent += "Description: " + recDescription + "\n";
+                        recordContent += "Work Notes & Comments:\n" + recJournals + "\n";
+                        recordContent += "Close Notes: " + recCloseNotes + "\n";
+                        recordContent += "-----------------------------\n\n";
+                    }
+                }
+            }
+
+        } else {
+            recordContent = "No relevant past records found.";
+        }
+        return recordContent;
+    },
+
+    formatKBResults: function(results) {
+
+        var kbContent = '';
+
+        if (results && results.length > 0) {
+
+            kbContent = "Relevant KB Articles:\n\n";
+
+            for (var a = 0; a < results.length; a++) {
+
+                var article = results[a];
+                var title = article.title || "Untitled";
+                var number = "";
+                var body = "";
+
+                // ]]>🔹<![CDATA[ Extract number and text from AI Search columns
+                if (article.columns) {
+                    for (var i = 0; i < article.columns.length; i++) {
+
+                        var field = article.columns[i];
+
+                        if (field.fieldName === "number")
+                            number = field.value;
+
+                        if (field.fieldName === "text")
+                            body = field.value;
+                    }
+                }
+
+                kbContent += "KB #" + (a + 1) + ":\n";
+                kbContent += "Title: " + title + "\n";
+                kbContent += "Number: " + number + "\n";
+                kbContent += "Content:\n" + body + "\n";
+                kbContent += "-----------------------------\n\n";
+            }
+
+        } else {
+            kbContent = "No relevant knowledge articles found.";
+        }
+
+        return kbContent;
+    },
+
+    callLLM: function(gr_record, kbContent, recordContent) {
+        try {
+            var gptClient = new sn_ws.RESTMessageV2();
+            gptClient.setEndpoint(endpoint);
+            gptClient.setHttpMethod("POST");
+
+            gptClient.setRequestHeader("Content-Type", "application/json");
+            gptClient.setRequestHeader("Authorization", apiKey); //  Replace with your API key
+
+            var journal_notes = [];
+            var jGrs = new GlideRecordSecure('sys_journal_field');
+            jGrs.addQuery('element_id', gr_record.getUniqueValue());
+            jGrs.orderBy('sys_created_on');
+            jGrs.query();
+            while (jGrs.next()) {
+                var entry_note = '[' + jGrs.element + ' - ' + jGrs.sys_created_on.getDisplayValue() + ']: ' + jGrs.value;
+                journal_notes.push(entry_note);
+            }
+
+
+            // Add state of the incident to the prompt
+            var gptPrompt = "Based on the following incident details within the ITSM framework, what should be the next step to resolve or escalate effectively? \n\n";
+            gptPrompt += "Instructions:\n" +
+                "1. The response MUST be strictly numbered starting from 1.\n" +
+                "2. Use exact format: 1. Step description\n" +
+                "3. Do NOT use '-', '*', bullets, or any other symbols.\n" +
+                "4. Do NOT use headings or titles.\n" +
+                "5. Keep each step short and simple.\n" +
+                "6. Only provide the next steps.\n" +
+                "7. Analyze both the provided KB Articles and past Incidents before suggesting steps.\n" +
+                "8. Reference a KB Article number in brackets only if it is directly relevant (e.g., KB0010235).\n" +
+                "9. Reference a past Incident number in brackets only if it is directly relevant (e.g., INC0012345).\n" +
+                "10. If both a KB and an Incident are relevant, reference both appropriately.\n" +
+                "11. Do NOT repeat the same KB or Incident number in multiple steps unless absolutely necessary.\n\n";
+            gptPrompt += "Incident:\n";
+            gptPrompt += "Short Description: " + gr_record.short_description + "\n";
+            gptPrompt += "Description: " + gr_record.description + "\n";
+            gptPrompt += "Category: " + gr_record.category + "\n";
+            gptPrompt += "Subcategory: " + gr_record.subcategory + "\n";
+            gptPrompt += "State: " + gr_record.state.getDisplayValue() + "\n\n";
+            gptPrompt += "jornalnotes" + journal_notes;
+            gptPrompt += "Assignement Group :" + gr_record.assignment_group.getDisplayValue() + "\n\n";
+            gptPrompt += "Assigned To: " + (gr_record.assigned_to.getDisplayValue() || "") + "\n";
+            gptPrompt += "Opened At: " + gr_record.opened_at.getDisplayValue() + "\n";
+            gptPrompt += "Location: " + (gr_record.location.getDisplayValue() || "") + "\n";
+            gptPrompt += "Category: " + (gr_record.category || "") + "\n";
+            gptPrompt += "Subcategory: " + (gr_record.subcategory || "") + "\n";
+            gptPrompt += "Company: " + (gr_record.company.getDisplayValue() || "") + "\n";
+            gptPrompt += "Business Service: " + (gr_record.business_service.getDisplayValue() || "") + "\n";
+            gptPrompt += "Configuration Item: " + (gr_record.cmdb_ci.getDisplayValue() || "") + "\n";
+            gptPrompt += kbContent + "\n\n";
+            gptPrompt += "Providing the past incidents if any relevent information from these seems useful for resolving the current incident add from these past details and mention its from past incident :" + recordContent + "\n\n";
+            gptPrompt += "Please recommend the most appropriate next step in alignment with ITIL best practices, considering service continuity, stakeholder communication, and root cause analysis" + "\n\n";
+            gptPrompt += "Mention KB Article numbers and Incident numbers which are provided in past incident and kb content details";
+
+            var gptPayload = JSON.stringify({
+                model: model,
+                messages: [{
+                    role: "user",
+                    content: gptPrompt
+                }]
+            });
+
+            gptClient.setRequestBody(gptPayload);
+
+            var gptResponse = gptClient.execute();
+            var gptBody = gptResponse.getBody();
+            var gptResult = JSON.parse(gptBody);
+            var suggestion = gptResult.choices[0].message.content;
+            var formattedSuggestion = this.convertNumbersToLinks(suggestion);
+            return formattedSuggestion;
+
+
+        } catch (e) {
+            return JSON.stringify("Unable to generate suggestion.");
+        }
+    },
+    generateNBA1: function() {
+        var data = this.getParameter('sysparm_data');
+        var inc = JSON.parse(data);
+        var short_description = inc.short_description;
+        var description = inc.description;
+        var category = inc.category;
+        var sub_category = inc.sub_category;
+        var state = inc.state;
+        var assignment_group = inc.assignment_group;
+        var assigned_to = inc.assigned_to;
+        var location = inc.location;
+        var company = inc.company;
+        var configuration_item = inc.configuration_item;
+        var searchPayload = JSON.stringify({
+
+            "rpSysId": kbRpSysId,
+            "searchContextConfigId": kbContextId,
+            "searchTerm": short_description
+        });
+        var incidentpayload = JSON.stringify({
+            "searchTerm": short_description,
+            "searchContextConfigId": incContextId,
+            "rpSysId": incRpSysId
+
+        });
+
+        var kbContent = '';
+        try {
+            var endpoint = gs.getProperty('azure_openai_endpoint');
+            var apiKey = gs.getProperty('azure_openai_key');
+            var model = gs.getProperty('azure_openai_model');
+            var aiClient = new sn_ws.RESTMessageV2();
+            var aiIncident = new sn_ws.RESTMessageV2();
+
+            aiClient.setEndpoint(gs.getProperty("x_ustgl_insighti_0.now_url"));
+            aiClient.setHttpMethod("POST");
+            aiClient.setRequestHeader("Content-Type", "application/json");
+            aiClient.setRequestHeader("Accept", "application/json");
+
+            // FIXED: credentials must be string: "username:password"
+            var encodedAuth = gs.base64Encode(gs.getProperty("x_ustgl_insighti_0.auth"));
+            aiClient.setRequestHeader("Authorization", "Basic " + encodedAuth);
+            aiClient.setRequestBody(searchPayload);
+
+            var aiResponse = aiClient.execute();
+            var aiResponseBody = aiResponse.getBody();
+            var aiResult = JSON.parse(aiResponseBody);
+            var searchResults = aiResult.result && aiResult.result.search && aiResult.result.search.searchResults;
+
+            // Ai seach for past incidents
+            aiIncident.setEndpoint(gs.getProperty("x_ustgl_insighti_0.now_url"));
+            aiIncident.setHttpMethod("POST");
+            aiIncident.setRequestHeader("Content-Type", "application/json");
+            aiIncident.setRequestHeader("Accept", "application/json");
+            aiIncident.setRequestHeader("Authorization", "Basic " + encodedAuth);
+            aiIncident.setRequestBody(incidentpayload);
+
+            var incidentResponse = aiIncident.execute();
+            var incidentResponseBody = incidentResponse.getBody();
+
+            var incidentResult;
+            try {
+                incidentResult = JSON.parse(incidentResponseBody);
+            } catch (err) {
+                incidentResult = {};
+            }
+            var incidentSearchResults = incidentResult.result && incidentResult.result.search && incidentResult.result.search.searchResults;
+            var incidentContent = '';
+            if (incidentSearchResults && incidentSearchResults.length > 0) {
+                incidentContent = "Relevant Past Incidents:\n\n";
+                var maxIncidents = 3;
+                for (var b = 0; b < Math.min(incidentSearchResults.length, maxIncidents); b++) {
+                    var incSearch = incidentSearchResults[b];
+                    var incNumber = "";
+                    var incSysId = "";
+
+                    // Extract sys_id and number from columns
+                    for (var j = 0; j < incSearch.columns.length; j++) {
+                        var incField = incSearch.columns[j];
+                        if (incField.fieldName === "sys_id") incSysId = incField.value;
+                        if (incField.fieldName === "number") incNumber = incField.value;
+                    }
+                    if (incSysId) {
+                        var gr_inc_nba = new GlideRecordSecure('incident');
+                        if (gr_inc_nba.get(incSysId)) {
+                            var incDescription = gr_inc_nba.description ? gr_inc_nba.description.toString() : '';
+                            var incCloseNotes = gr_inc_nba.close_notes ? gr_inc_nba.close_notes.toString() : '';
+
+                            // Fetch journal entries for this incident (work_notes, comments)
+                            var journals = [];
+                            var jGr = new GlideRecordSecure('sys_journal_field');
+                            jGr.addQuery('element_id', gr_inc_nba.getUniqueValue());
+                            jGr.orderBy('sys_created_on');
+                            jGr.query();
+                            while (jGr.next()) {
+                                var entry = '[' + jGr.element + ' - ' + jGr.sys_created_on.getDisplayValue() + ']: ' + jGr.value;
+                                journals.push(entry);
+                            }
+                            var incJournals = journals.join('\n');
+
+                            // Build incident content
+                            incidentContent += "Incident #" + (b + 1) + ":\n";
+                            incidentContent += "Number: " + incNumber + "\n";
+                            incidentContent += "Description: " + incDescription + "\n";
+                            incidentContent += "Work Notes & Comments:\n" + incJournals + "\n";
+                            incidentContent += "Close Notes: " + incCloseNotes + "\n";
+                            incidentContent += "-----------------------------\n\n";
+                        }
+                    }
+                }
+            } else {
+                incidentContent = "No relevant past incidents found.";
+            }
+
+            if (searchResults && searchResults.length > 0) {
+                kbContent = "Relevant KB Articles:\n\n";
+
+                var maxArticles = 3; // Limit KB articles to top 3
+                for (var a = 0; a < Math.min(searchResults.length, maxArticles); a++) {
+                    var article = searchResults[a];
+                    var title = article.title || "Untitled";
+                    var number = "";
+                    var body = "";
+
+                    // Extract number and text from 'columns'
+                    for (var i = 0; i < article.columns.length; i++) {
+                        var field = article.columns[i];
+                        if (field.fieldName === "number") number = field.value;
+                        if (field.fieldName === "text") body = field.value;
+                    }
+
+                    kbContent += " KB #" + (a + 1) + ":\n";
+                    kbContent += "Title: " + title + "\n";
+                    kbContent += "Number: " + number + "\n";
+                    kbContent += "Content:\n" + body + "\n";
+                    kbContent += "-----------------------------\n\n";
+                }
+            } else {
+                kbContent = "No relevant knowledge articles found.";
+            }
+        } catch (e) {
+            return null;
+        }
+
+        // Call GPT (via REST Message or direct endpoint)
+        try {
+            var gptClient = new sn_ws.RESTMessageV2();
+            gptClient.setEndpoint(endpoint);
+            gptClient.setHttpMethod("POST");
+            gptClient.setRequestHeader("Content-Type", "application/json");
+            gptClient.setRequestHeader("Authorization", apiKey); // Replace with your API key
+
+            // Add state of the incident to the prompt
+            var gptPrompt = "Based on the following incident details within the ITSM framework, what should be the next step to resolve or escalate effectively? \n\n";
+            gptPrompt += "Insdtructions \n  1. Do not use # to separate points the response should be in well structured format to be displayed in a serviceNow form field \n 2. Keep the steps short and simple \n 3. Only provide the Next steps do not additionally add any headings \n 4. Make it point wise \n  4. If any Kb Article is referenced say the article name in brackets if not inform that too";
+            gptPrompt += "Incident:\n";
+            gptPrompt += "Short Description: " + short_description + "\n";
+            gptPrompt += "Description: " + description + "\n";
+            gptPrompt += "Category: " + category + "\n";
+            gptPrompt += "Subcategory: " + sub_category + "\n";
+            gptPrompt += "State: " + state + "\n\n";
+            gptPrompt += "Assignement Group :" + assignment_group + "\n\n";
+            gptPrompt += "Assigned To: " + assigned_to + "\n";
+            gptPrompt += "Location: " + location + "\n";
+            gptPrompt += "Company: " + company + "\n";
+            gptPrompt += "Configuration Item: " + configuration_item + "\n";
+            gptPrompt += kbContent + "\n\n";
+            gptPrompt += "Providing the past incidents if any relevent information from these seems useful for resolving the current incident add from these past details and mention its from past incident :" + incidentContent + "\n\n";
+            gptPrompt += "Please recommend the most appropriate next step in alignment with ITIL best practices, considering service continuity, stakeholder communication, and root cause analysis" + "\n\n";
+            gptPrompt += "Mention KB Article numbers and Incident numbers which are provided in past incident and kb content details";
+
+            var gptPayload = JSON.stringify({
+                model: model,
+                messages: [{
+                    role: "user",
+                    content: gptPrompt
+                }]
+            });
+
+            gptClient.setRequestBody(gptPayload);
+
+            var gptResponse = gptClient.execute();
+            var gptBody = gptResponse.getBody();
+
+            var gptResult = JSON.parse(gptBody);
+            var suggestion = gptResult.choices[0].message.content;
+
+            return suggestion;
+
+        } catch (e) {
+            return JSON.stringify("Unable to generate suggestion.");
+        }
+    },
+
+    //function to model the KB and Incident number as hyper links 
+    convertNumbersToLinks: function(text) {
+
+        // Handle KB-type numbers
+        text = text.replace(/\b(kb|sop|kbscg)\d+\b/gi, function(match) {
+
+            var number = match.toUpperCase(); // normalize
+
+            var grKB = new GlideRecordSecure('kb_knowledge');
+            grKB.addQuery('number', number);
+            grKB.setLimit(1);
+            grKB.query();
+
+            if (grKB.next()) {
+                return '<a href="/kb_knowledge.do?sys_id=' + grKB.getUniqueValue() +
+                    '" target="_blank" style="text-decoration: none;">' + number + '</a>';
+            }
+            return number;
+        });
+
+        text = text.replace(/\b[a-z]{3,}\d+\b/gi, function(match) {
+
+            var number = match.toUpperCase();
+
+            var grTask = new GlideRecordSecure('task');
+            grTask.addQuery('number', number);
+            grTask.setLimit(1);
+            grTask.query();
+
+            if (grTask.next()) {
+
+                var tableName = grTask.getRecordClassName();
+
+                return '<a href="/' + tableName + '.do?sys_id=' +
+                    grTask.getUniqueValue() +
+                    '" target="_blank" style="text-decoration:none;">' +
+                    number + '</a>';
+            }
+
+            return number;
+        });
+
+        text = text.replace(/\r?\n/g, "<br/>");
+
+        return '<div style="font-family: Arial, sans-serif; ' +
+            'font-size: 10pt; ' +
+            'border: 1px solid #8a8a8a; ' +
+            'padding: 8px; ' +
+            'background-color: #ffffff;">' +
+            text +
+            '</div>';
+    },
+
+    //function to check the content of short description or description is valid or not
+    validateTaskContent: function(text) {
+
+        if (!text)
+            return false;
+        try {
+            var endpoint = gs.getProperty('azure_openai_endpoint');
+            var apiKey = gs.getProperty('azure_openai_key');
+            var model = gs.getProperty('azure_openai_model');
+            var client = new sn_ws.RESTMessageV2();
+            client.setEndpoint(endpoint);
+            client.setHttpMethod("POST");
+            client.setRequestHeader("Content-Type", "application/json");
+            client.setRequestHeader("Authorization", apiKey);
+
+            var prompt = "You are validating an ITSM Task Description.\n\n" +
+                "If the following text is meaningful and related to a technical issue, return exactly: YES\n" +
+                "If it is a greeting, random words, test data, or unrelated content, return exactly: NO\n\n" + "Task Description:\n" + text;
+            var payload = JSON.stringify({
+                model: model,
+                messages: [{
+                    role: "user",
+                    content: prompt
+                }],
+            });
+
+            client.setRequestBody(payload);
+            var response = client.execute();
+            var result = JSON.parse(response.getBody());
+            var answer = result.choices[0].message.content.trim();
+            return answer.toUpperCase().indexOf("YES") === 0;
+
+        } catch (e) {
+            return false; // safer fallback
+        }
+    },
+    type: 'NBAGeneration'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-25 14:23:08</sys_created_on>
+        <sys_id>84c35a95839bf2d03be7a7d0deaad337</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>NBAGeneration</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_script_include_84c35a95839bf2d03be7a7d0deaad337</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-25 14:23:45</sys_updated_on>
+    </sys_script_include>
+</record_update>

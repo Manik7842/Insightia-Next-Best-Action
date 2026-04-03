@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
+    <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
+        <dependency display_value="Task table schema" source="com.glide.task">c616edb5eb3331104d66f624dad0cd4c</dependency>
+        <min_version>1.0.0</min_version>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-26 08:58:07</sys_created_on>
+        <sys_id>70f252a98397f6d03be7a7d0deaad33d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-26 08:58:07</sys_updated_on>
+    </sys_package_dependency_m2m>
+</record_update>

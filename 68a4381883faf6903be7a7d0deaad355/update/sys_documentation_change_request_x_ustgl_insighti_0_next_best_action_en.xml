@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="x_ustgl_insighti_0_next_best_action" label="Next Best Action" language="en" table="change_request">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>x_ustgl_insighti_0_next_best_action</element>
+            <help/>
+            <hint/>
+            <label>Next Best Action</label>
+            <language>en</language>
+            <name>change_request</name>
+            <plural>Next Best Actions</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>Prahlad.Gorantla</sys_created_by>
+            <sys_created_on>2026-03-13 08:32:07</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Next Best Action</sys_name>
+            <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+            <sys_update_name>sys_documentation_change_request_x_ustgl_insighti_0_next_best_action_en</sys_update_name>
+            <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+            <sys_updated_on>2026-03-13 08:32:07</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>read</operation>
+        <source_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-24 07:37:03</sys_created_on>
+        <sys_id>353d2bf42b53f690d16df709f291bfc4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sn_fe_sharepoint_file_metadata</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_scope_privilege_353d2bf42b53f690d16df709f291bfc4</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-24 07:37:03</sys_updated_on>
+        <target_name>sn_fe_sharepoint_file_metadata</target_name>
+        <target_scope display_value="Microsoft SharePoint File Explorer Connector for Security Incident Response integration">e274b2d2f075601083398af6acc6ab1c</target_scope>
+        <target_type>sys_db_object</target_type>
+    </sys_scope_privilege>
+</record_update>

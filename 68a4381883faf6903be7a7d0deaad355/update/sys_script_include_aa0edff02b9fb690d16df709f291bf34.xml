@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_ustgl_insighti_0.NBAGeneration</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>NBAGeneration</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var NBAGeneration = Class.create();
+NBAGeneration.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+    CONFIG: {
+        endpoint: gs.getProperty('azure_openai_endpoint'),
+        apiKey: gs.getProperty('azure_openai_key'),
+        model: gs.getProperty('azure_openai_model')
+    },
+    generateNBA: function() {
+
+        var kbRpSysId = gs.getProperty('x_ustgl_insighti_0.search.kb.rp_sys_id');
+        var kbContextId = gs.getProperty('x_ustgl_insighti_0.search.kb.context_id');
+        var incRpSysId = gs.getProperty('x_ustgl_insighti_0.search.incident.rp_sys_id');
+        var incContextId = gs.getProperty('x_ustgl_insighti_0.search.incident.context_id');
+        var prbRpSysId = gs.getProperty('x_ustgl_insighti_0.search.problem.rp_sys_id');
+        var prbContextId = gs.getProperty('x_ustgl_insighti_0.search.problem.context_id');
+        var cattaskRpSysId = gs.getProperty('x_ustgl_insighti_0.search.catalog_task.rp_sys_id');
+        var cattaskContextId = gs.getProperty('x_ustgl_insighti_0.search.catalog_task.context_id');
+        var chngreqRpSysId = gs.getProperty('x_ustgl_insighti_0.search.change_req.rp_sys_id');
+        var chngreqContextId = gs.getProperty('x_ustgl_insighti_0.search.change_req.context_id');
+
+        var recSysid = this.getParameter('sysparm_sys_id');
+        var tableName = this.getParameter('sysparm_table');
+
+        var finalText = '';
+        if (recSysid && tableName) {
+            var gr_record = new GlideRecordSecure(tableName);
+            if (gr_record.get(recSysid)) {
+                var short_description = gr_record.isValidField('short_description') ?
+                    (gr_record.getValue('short_description') || '').trim() : '';
+                var description = gr_record.isValidField('description') ?
+                    (gr_record.getValue('description') || '').trim() : '';
+                finalText = short_description && description ? (short_description.toLowerCase() === description.toLowerCase() ? short_description : short_description + ' ' + description) : (short_description || description);
+                if (!this.validateTaskContent(finalText)) {
+                    return "ERROR: There is not enough " + this.getTableDisplayName(tableName) + " information.";
+                }
+            }
+        }
+        var searchConfig = {
+            incident: {
+                rp: incRpSysId,
+                ctx: incContextId
+            },
+            problem: {
+                rp: prbRpSysId,
+                ctx: prbContextId
+            },
+            change_request: {
+                rp: chngreqRpSysId,
+                ctx: chngreqContextId
+            },
+            sc_task: {
+                rp: cattaskRpSysId,
+                ctx: cattaskContextId
+            }
+        };
+
+        var config = searchConfig[tableName];
+        var recordSearchResults = [];
+        if (config) {
+            var recPayload = this.buildSearchPayload(config.rp, config.ctx, finalText);
+            if (recPayload)
+                recordSearchResults = this.getTopResults(recPayload) || [];
+        }
+
+        var kbSearchResults = [];
+        var kbPayload = this.buildSearchPayload(kbRpSysId, kbContextId, finalText);
+        gs.info('prahlad debugging102 final text ' + finalText);
+        if (kbPayload)
+            kbSearchResults = this.getTopResults(kbPayload) || [];
+        gs.info('prahlad debugging102 AI kb search count:' + kbSearchResults.length);
+        gs.info('prahlad debugging102 AI Record search count:' + recordSearchResults.length);
+        var kbContent = this.formatKBResults(kbSearchResults);
+        var recordContent = this.formatRecordResults(recordSearchResults, tableName);
+
+
+        return this.callLLM(gr_record, kbContent, recordContent, tableName);
+    },
+
+    buildSearchPayload: function(rpSysId, contextId, searchTerm) {
+        if (!rpSysId || !contextId || !searchTerm)
+            return null;
+
+        return JSON.stringify({
+            rpSysId: rpSysId,
+            searchContextConfigId: contextId,
+            searchTerm: searchTerm
+        });
+    },
+    //call to AI Search and getting the results
+    executeSearch: function(payload) {
+        var aiSearchResults = new sn_ws.RESTMessageV2();
+        aiSearchResults.setEndpoint(gs.getProperty("x_ustgl_insighti_0.now_url"));
+        aiSearchResults.setHttpMethod("POST");
+        aiSearchResults.setRequestHeader("Content-Type", "application/json");
+        aiSearchResults.setRequestHeader("Accept", "application/json");
+        aiSearchResults.setRequestHeader("Authorization", "Basic " + gs.base64Encode(gs.getProperty("x_ustgl_insighti_0.auth")));
+        aiSearchResults.setRequestBody(payload);
+        var aiResponse = aiSearchResults.execute();
+        var aiResponseBody = aiResponse.getBody();
+        var aiResult = JSON.parse(aiResponseBody);
+        return aiResult.result && aiResult.result.search && aiResult.result.search.searchResults;
+    },
+
+    getTopResults: function(payload) {
+        var results = this.executeSearch(payload) || [];
+        return results.slice(0, 3);
+    },
+
+    formatRecordResults: function(results, tableName) {
+
+        var recordContent = '';
+
+        if (results && results.length > 0) {
+
+            recordContent = "Relevant Past Records:\n\n";
+
+            for (var b = 0; b < results.length; b++) {
+
+                var rec = results[b];
+                var recNumber = "";
+                var recSysId = "";
+
+                // Extract sys_id and number from AI Search columns
+                if (rec.columns) {
+                    for (var j = 0; j < rec.columns.length; j++) {
+                        var recField = rec.columns[j];
+                        if (recField.fieldName === "sys_id") recSysId = recField.value;
+                        if (recField.fieldName === "number") recNumber = recField.value;
+                    }
+                }
+
+                if (recSysId) {
+                    var grRec = new GlideRecordSecure(tableName);
+                    if (grRec.get(recSysId)) {
+                        var recDescription = grRec.getValue('description') || '';
+                        var recCloseNotes = grRec.isValidField('close_notes') ?
+                            (grRec.getValue('close_notes') || '') : '';
+
+                        // Fetch journal entries
+                        var journals = [];
+                        var jGr = new GlideRecordSecure('sys_journal_field');
+                        jGr.addQuery('element_id', recSysId);
+                        jGr.orderBy('sys_created_on');
+                        jGr.query();
+
+                        while (jGr.next()) {
+                            var entry = '[' + jGr.getValue('element') + ' - ' + jGr.getDisplayValue('sys_created_on') + ']: ' + (jGr.getValue('value') || '');
+                            journals.push(entry);
+                        }
+
+                        var recJournals = journals.join('\n');
+
+                        recordContent += "Record #" + (b + 1) + ":\n";
+                        recordContent += "Number: " + recNumber + "\n";
+                        recordContent += "Description: " + recDescription + "\n";
+                        recordContent += "Work Notes & Comments:\n" + recJournals + "\n";
+                        recordContent += "Close Notes: " + recCloseNotes + "\n";
+                        recordContent += "-----------------------------\n\n";
+                    }
+                }
+            }
+
+        } else {
+            recordContent = "No relevant past records found.";
+        }
+        gs.info('prahlad debugging102 AI Search record content' + recordContent);
+        return recordContent;
+    },
+
+    formatKBResults: function(results) {
+
+        var kbContent = '';
+
+        if (results && results.length > 0) {
+
+            kbContent = "Relevant KB Articles:\n\n";
+
+            for (var a = 0; a < results.length; a++) {
+
+                var article = results[a];
+                var title = (article.title || "Untitled").replace(/<\/?[^>]+(>|$)/g, "");
+                var number = "";
+                var body = "";
+
+                // Extract number and text from AI Search columns
+                if (article.columns) {
+                    for (var i = 0; i < article.columns.length; i++) {
+                        var field = article.columns[i];
+                        if (field.fieldName === "number") number = field.value;
+                        if (field.fieldName === "text") body = field.value;
+                    }
+                }
+                var content = body || "No full content available.";
+
+                kbContent += "KB #" + (a + 1) + ":\n";
+                kbContent += "Title: " + title + "\n";
+                kbContent += "Number: " + number + "\n";
+                kbContent += "Content:\n" + content + "\n";
+                kbContent += "-----------------------------\n\n";
+            }
+
+        } else {
+            kbContent = "No relevant knowledge articles found.";
+        }
+        gs.info('prahlad debugging102 AI Search kb content' + kbContent);
+        return kbContent;
+    },
+
+    callLLM: function(gr_record, kbContent, recordContent, tableName) {
+        try {
+            var displayName = this.getTableDisplayName(tableName);
+            var gptClient = new sn_ws.RESTMessageV2();
+            gptClient.setEndpoint(this.CONFIG.endpoint);
+            gptClient.setHttpMethod("POST");
+
+            gptClient.setRequestHeader("Content-Type", "application/json");
+            gptClient.setRequestHeader("Authorization", this.CONFIG.apiKey);
+            var journal_notes = [];
+            var jGrs = new GlideRecordSecure('sys_journal_field');
+            jGrs.addQuery('element_id', gr_record.getUniqueValue());
+            jGrs.orderBy('sys_created_on');
+            jGrs.query();
+            while (jGrs.next()) {
+                var entry_note = '[' + jGrs.element + ' - ' + jGrs.sys_created_on.getDisplayValue() + ']: ' + jGrs.value;
+                journal_notes.push(entry_note);
+            }
+
+            // Add state of the record, past recordes and past KB's to the prompt
+            var gptPrompt = "Based on the following " + displayName + " details within the ITSM framework, identify the most appropriate next 7 steps to resolve or escalate effectively. \n\n";
+            gptPrompt += "CRITICAL INSTRUCTIONS (MUST FOLLOW STRICTLY):\n" +
+                "1. Provide EXACTLY 7 steps. Not more. Not less.\n" +
+                "2. Numbering must start from 1 and end at 7.\n" +
+                "3. Use exact format: 1. Step description\n" +
+                "4. Do NOT use '-', '*', bullets, or any other symbols.\n" +
+                "5. Do NOT use headings or titles.\n" +
+                "6. Keep each step short, clear, and actionable.\n" +
+                "7. Only provide the 7 steps.\n" +
+                "8. Review the provided Knowledge Articles and past " + displayName + " records to understand similar issues and resolutions before suggesting steps.\n" +
+                "9. The Knowledge Articles and past " + displayName + " records were retrieved by AI Search as potential matches but may not always be relevant.\n" +
+                "10. Determine relevance by comparing the short description, description, symptoms, environment, and troubleshooting steps in the current " + displayName + " record with the provided Knowledge Articles and past " + displayName + " records.\n" +
+                "11. A Knowledge Article or past record is relevant only if it describes a similar issue, similar symptoms, similar environment, or similar troubleshooting or resolution steps.\n" +
+                "12. Ignore any Knowledge Articles or past " + displayName + " records that are not clearly related to the current issue.\n" +
+                "13. If the retrieved Knowledge Articles or past " + displayName + " records do not clearly relate to the same system, application, or issue type as the current " + displayName + ", treat them as not relevant and do not reference them.\n" +
+                "14. If a Knowledge Article is relevant, reference its numbers must be in square brackets (e.g., [Number from the Relevant Knowledge Articles]).\n" +
+                "15. If a past " + displayName + " record is relevant, reference its record number must be in square brackets (e.g., [Number from the Relevant Past " + displayName + " Records]).\n" +
+                "16. If multiple Knowledge Articles or past records are relevant, distribute their references across different steps when appropriate instead of repeating the same reference.\n" +
+                "17. Do not generate, assume, or fabricate any Knowledge Article or " + displayName + " numbers that are not explicitly provided above.\n" +
+                "18. Do not include knowledge article or past " + displayName + " records content in the steps; only include their numbers when referencing them.\n" +
+                "19. If relevant Knowledge Articles or past records exist, include at least one reference in the steps.\n" +
+                "20. If none are relevant, generate the steps without references.\n" +
+                "21. Before responding, verify that the output contains exactly 7 numbered steps.\n\n";
+            gptPrompt += displayName.toUpperCase() + " DETAILS:\n";
+            gptPrompt += "Short Description: " + gr_record.getValue('short_description') + "\n";
+            gptPrompt += "Description: " + gr_record.getValue('description') + "\n";
+            gptPrompt += "Category: " + gr_record.getDisplayValue('category') + "\n";
+            gptPrompt += "Subcategory: " + gr_record.getDisplayValue('subcategory') + "\n";
+            gptPrompt += "State: " + gr_record.getDisplayValue('state') + "\n";
+            gptPrompt += "Journal Notes:\n" + journal_notes.join("\n") + "\n\n";
+            gptPrompt += "Assignment Group: " + gr_record.getDisplayValue('assignment_group') + "\n";
+            gptPrompt += "Assigned To: " + (gr_record.getDisplayValue('assigned_to') || "") + "\n";
+            gptPrompt += "Opened At: " + gr_record.getDisplayValue('opened_at') + "\n";
+            gptPrompt += "Location: " + (gr_record.getDisplayValue('location') || "") + "\n";
+            gptPrompt += "Company: " + (gr_record.getDisplayValue('company') || "") + "\n";
+            gptPrompt += "Business Service: " + (gr_record.getDisplayValue('business_service') || "") + "\n";
+            gptPrompt += "Configuration Item: " + (gr_record.getDisplayValue('cmdb_ci') || "") + "\n";
+            gptPrompt += "The following Knowledge Articles and past " + displayName + " records were retrieved by AI Search as potential matches. Evaluate their relevance before referencing them.\n\n";
+            gptPrompt += "Relevant Knowledge Articles:\n" + kbContent + "\n\n";
+            gptPrompt += "Relevant Past " + displayName + " Records:\n" + recordContent + "\n\n";
+            gptPrompt += "Ensure the suggested steps align with ITIL best practices, focusing on service continuity, stakeholder communication, root cause analysis, and long-term resolution.";
+
+            var gptPayload = JSON.stringify({
+                model: this.CONFIG.model,
+                messages: [{
+                    role: "user",
+                    content: gptPrompt
+                }]
+            });
+            gptClient.setRequestBody(gptPayload);
+            gs.info("prahlad debugging102 prompt" + gptPrompt);
+            var gptResponse = gptClient.execute();
+            var gptBody = gptResponse.getBody();
+            var gptResult = JSON.parse(gptBody);
+            var suggestion = gptResult.choices[0].message.content;
+            gs.info("prahlad debugging102 final output" + suggestion);
+            var formattedSuggestion = this.convertNumbersToLinks(suggestion, displayName);
+            return formattedSuggestion;
+        } catch (e) {
+            return JSON.stringify("Unable to generate suggestion.");
+        }
+    },
+
+    //function to model the KB and Incident number as hyper links 
+    convertNumbersToLinks: function(text, displayName) {
+
+        var hasKB = /\b(KB|SOP|KBSGC)\d+\b/i.test(text);
+        var hasRecord = /\b(INC|CHG|PRB|SCTASK)\d+\b/i.test(text);
+        var step8 = "";
+        if (!hasKB && !hasRecord) {
+            step8 = "8. No relevant KB articles or " + displayName + " details are found.";
+        } else if (!hasKB) {
+            step8 = "8. No relevant KB articles are found.";
+        } else if (!hasRecord) {
+            step8 = "8. No relevant " + displayName + " details are found.";
+        }
+        if (step8)
+            text += "\n" + step8;
+
+        // Handle KB-type numbers
+        //text = text.replace(/\b(kb|sop|kbsgc)\d+\b/gi, function(match) {
+        text = text.replace(/\b(KB|SOP|KBSGC)\d+\b/gi, function(match) {
+
+            var number = match.toUpperCase(); // normalize
+
+            var grKB = new GlideRecordSecure('kb_knowledge');
+            grKB.addQuery('number', number);
+            grKB.setLimit(1);
+            grKB.query();
+
+            if (grKB.next()) {
+                return '<a href="/kb_knowledge.do?sys_id=' + grKB.getUniqueValue() +
+                    '" target="_blank" style="text-decoration: none;">' + number + '</a>';
+            }
+            return number;
+        });
+
+        //text = text.replace(/\b[a-z]{3,}\d+\b/gi, function(match) {
+        text = text.replace(/\b(INC|CHG|PRB|SCTASK)\d+\b/gi, function(match) {
+
+            var number = match.toUpperCase();
+
+            var grTask = new GlideRecordSecure('task');
+            grTask.addQuery('number', number);
+            grTask.setLimit(1);
+            grTask.query();
+
+            if (grTask.next()) {
+
+                var tableName = grTask.getRecordClassName();
+
+                return '<a href="/' + tableName + '.do?sys_id=' +
+                    grTask.getUniqueValue() +
+                    '" target="_blank" style="text-decoration:none;">' +
+                    number + '</a>';
+            }
+
+            return number;
+        });
+
+        text = text.replace(/\r?\n/g, "<br/>");
+
+        return '<div style="font-family: Arial, sans-serif; ' +
+            'font-size: 10pt; ' +
+            'border: 1px solid #8a8a8a; ' +
+            'padding: 8px; ' +
+            'background-color: #ffffff;">' +
+            text +
+            '</div>';
+    },
+
+    //function to check the content of short description or description is valid or not
+    validateTaskContent: function(text) {
+
+        if (!text || text.trim().split(/\s+/).length < 2)
+            return false;
+        try {
+            var client = new sn_ws.RESTMessageV2();
+            client.setEndpoint(this.CONFIG.endpoint);
+            client.setHttpMethod("POST");
+            client.setRequestHeader("Content-Type", "application/json");
+            client.setRequestHeader("Authorization", this.CONFIG.apiKey);
+
+            var prompt = "You are validating an ITSM task description.\n\n" +
+                "Return only one word: YES or NO.\n\n" +
+
+                "Return YES only if the text clearly indicates a technical issue, service request, system problem, access request, or troubleshooting need related to IT services.\n\n" +
+
+                "Return NO if the text:\n" +
+                "- does not indicate a problem or request for assistance\n" +
+                "- is a greeting, casual message, or general statement\n" +
+                "- contains random words, test data, or meaningless text\n\n" +
+
+                "Do not explain your answer. Return only YES or NO.\n\n" +
+
+                "Task Description:\n" + text;
+            var payload = JSON.stringify({
+                model: this.CONFIG.model,
+                messages: [{
+                    role: "user",
+                    content: prompt
+                }],
+            });
+            client.setRequestBody(payload);
+            var response = client.execute();
+            var result = JSON.parse(response.getBody());
+            var answer = result.choices[0].message.content.trim();
+            return answer.toUpperCase().indexOf("YES") === 0;
+
+        } catch (e) {
+            return false;
+        }
+    },
+    getTableDisplayName: function(tableName) {
+        var gr = new GlideRecordSecure(tableName);
+        return gr.getLabel();
+    },
+    type: 'NBAGeneration'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-24 06:46:05</sys_created_on>
+        <sys_id>aa0edff02b9fb690d16df709f291bf34</sys_id>
+        <sys_mod_count>142</sys_mod_count>
+        <sys_name>NBAGeneration</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_script_include_aa0edff02b9fb690d16df709f291bf34</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-03-10 10:15:39</sys_updated_on>
+    </sys_script_include>
+</record_update>

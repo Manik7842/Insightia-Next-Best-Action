@@ -24,7 +24,7 @@
         <scoped_administration>false</scoped_administration>
         <short_description>Insightia(NBA)</short_description>
         <source>x_ustgl_insighti_0</source>
-        <store_correlation_id/>
+        <store_correlation_id>REPOAPP0002492351</store_correlation_id>
         <store_url/>
         <subscription_entitlement/>
         <sys_class_name>sys_app</sys_class_name>
@@ -32,9 +32,9 @@
         <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
         <sys_created_on>2026-01-28 08:22:14</sys_created_on>
         <sys_id>68a4381883faf6903be7a7d0deaad355</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_updated_by>Mosam.ManikSwamy@ust.com</sys_updated_by>
-        <sys_updated_on>2026-02-09 09:58:08</sys_updated_on>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>Rajasekhar.Pattipati@ust.com</sys_updated_by>
+        <sys_updated_on>2026-04-03 08:55:26</sys_updated_on>
         <template/>
         <trackable>true</trackable>
         <uninstall_blocked>false</uninstall_blocked>

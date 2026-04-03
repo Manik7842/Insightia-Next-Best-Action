@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cs_document_context_profile">
+    <sys_cs_document_context_profile action="INSERT_OR_UPDATE">
+        <context_profile display_value="Now Assist Panel - Platform (default)">e93cab98c7c03110b65579a988c260c4</context_profile>
+        <document>8b29fbba8317ba143be7a7d0deaad3da</document>
+        <document_table>sys_cs_topic</document_table>
+        <sys_class_name>sys_cs_document_context_profile</sys_class_name>
+        <sys_created_by>Rajasekhar.Pattipati@ust.com</sys_created_by>
+        <sys_created_on>2026-03-02 13:37:09</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>c32973fa8317ba143be7a7d0deaad36f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_cs_document_context_profile_c32973fa8317ba143be7a7d0deaad36f</sys_update_name>
+        <sys_updated_by>Rajasekhar.Pattipati@ust.com</sys_updated_by>
+        <sys_updated_on>2026-03-02 13:37:09</sys_updated_on>
+    </sys_cs_document_context_profile>
+</record_update>

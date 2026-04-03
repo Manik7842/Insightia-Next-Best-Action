@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_filter">
+    <sys_search_filter action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <ais_search_source display_value="Problem search">d9121929831bb6d03be7a7d0deaad3bb</ais_search_source>
+        <label>Problem</label>
+        <name>Problem search</name>
+        <order>100</order>
+        <search_context_config display_value="Problem context">2c4532392b17f2d0d16df709f291bf87</search_context_config>
+        <sys_class_name>sys_search_filter</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-27 06:09:57</sys_created_on>
+        <sys_id>5b06fefd2b17f2d0d16df709f291bfdf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Problem search</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_search_filter_5b06fefd2b17f2d0d16df709f291bfdf</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-27 06:09:57</sys_updated_on>
+    </sys_search_filter>
+</record_update>

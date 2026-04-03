@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="ais_dictionary">
+    <ais_dictionary action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <auto_refresh>24</auto_refresh>
+        <blocked_field/>
+        <case_sensitive>false</case_sensitive>
+        <data_source>change_request</data_source>
+        <derived>true</derived>
+        <field/>
+        <label>Change Request Search Profile Default Spell Check Dictionary</label>
+        <last_derived>2026-04-02 10:26:57</last_derived>
+        <locale>en</locale>
+        <name>x_ustgl_insighti_0_change_request_search_profile_default_spell_check_dictionary</name>
+        <publish_id>bb42c890-f8d8-45b0-9e38-675005400f87</publish_id>
+        <punctuation_sensitive>false</punctuation_sensitive>
+        <state>PUBLISHED</state>
+        <sys_class_name>ais_dictionary</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-28 17:34:17</sys_created_on>
+        <sys_id>1d4c92128313b2143be7a7d0deaad30d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_ustgl_insighti_0_change_request_search_profile_default_spell_check_dictionary</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>ais_dictionary_1d4c92128313b2143be7a7d0deaad30d</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-28 17:34:17</sys_updated_on>
+        <type>SPELLCHECK</type>
+    </ais_dictionary>
+</record_update>

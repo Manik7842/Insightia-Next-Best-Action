@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="ais_datasource">
+    <ais_datasource action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <conflict>false</conflict>
+        <embedding_model>E5FT</embedding_model>
+        <filter/>
+        <force_late_binding>false</force_late_binding>
+        <name>Change Request Index Source</name>
+        <retention_policy display_value="One year">7c7f19e57792f010be280d892c5a99b8</retention_policy>
+        <source>change_request</source>
+        <sys_class_name>ais_datasource</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-02-28 17:20:57</sys_created_on>
+        <sys_id>ccf89ed283df72143be7a7d0deaad3f3</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Change Request Index Source</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>ais_datasource_ccf89ed283df72143be7a7d0deaad3f3</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-02-28 17:30:17</sys_updated_on>
+        <type>internal</type>
+    </ais_datasource>
+</record_update>
