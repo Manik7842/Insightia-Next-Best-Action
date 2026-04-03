@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="ais_search_profile_ais_search_source_m2m">
+    <ais_search_profile_ais_search_source_m2m action="INSERT_OR_UPDATE">
+        <exclude_attachments_in_now_assist_genius_results>false</exclude_attachments_in_now_assist_genius_results>
+        <exclude_in_now_assist_genius_results>false</exclude_in_now_assist_genius_results>
+        <exclude_in_regular_search>false</exclude_in_regular_search>
+        <profile display_value="Incident Search Profile">bc6d9891830847583be7a7d0deaad368</profile>
+        <search_source display_value="Incident Search Source">6e8bdc9d83c447583be7a7d0deaad3da</search_source>
+        <sys_class_name>ais_search_profile_ais_search_source_m2m</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-04-03 12:33:54</sys_created_on>
+        <sys_id>fb7d5cd5830847583be7a7d0deaad3d0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Incident Search Profile.Incident Search Source</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>ais_search_profile_ais_search_source_m2m_fb7d5cd5830847583be7a7d0deaad3d0</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-04-03 12:33:54</sys_updated_on>
+    </ais_search_profile_ais_search_source_m2m>
+</record_update>

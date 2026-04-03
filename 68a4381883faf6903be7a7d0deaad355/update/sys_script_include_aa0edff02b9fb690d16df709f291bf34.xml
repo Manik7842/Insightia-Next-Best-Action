@@ -75,11 +75,11 @@ NBAGeneration.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 
         var kbSearchResults = [];
         var kbPayload = this.buildSearchPayload(kbRpSysId, kbContextId, finalText);
-        gs.info('prahlad debugging102 final text ' + finalText);
+        gs.info('prahlad debugging103 final text ' + finalText);
         if (kbPayload)
             kbSearchResults = this.getTopResults(kbPayload) || [];
-        gs.info('prahlad debugging102 AI kb search count:' + kbSearchResults.length);
-        gs.info('prahlad debugging102 AI Record search count:' + recordSearchResults.length);
+        gs.info('prahlad debugging103 AI kb search count:' + kbSearchResults.length);
+        gs.info('prahlad debugging103 AI Record search count:' + recordSearchResults.length);
         var kbContent = this.formatKBResults(kbSearchResults);
         var recordContent = this.formatRecordResults(recordSearchResults, tableName);
 
@@ -174,7 +174,7 @@ NBAGeneration.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         } else {
             recordContent = "No relevant past records found.";
         }
-        gs.info('prahlad debugging102 AI Search record content' + recordContent);
+        gs.info('prahlad debugging103 AI Search record content' + recordContent);
         return recordContent;
     },
 
@@ -213,7 +213,7 @@ NBAGeneration.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         } else {
             kbContent = "No relevant knowledge articles found.";
         }
-        gs.info('prahlad debugging102 AI Search kb content' + kbContent);
+        gs.info('prahlad debugging103 AI Search kb content' + kbContent);
         return kbContent;
     },
 
@@ -287,12 +287,12 @@ NBAGeneration.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
                 }]
             });
             gptClient.setRequestBody(gptPayload);
-            gs.info("prahlad debugging102 prompt" + gptPrompt);
+            gs.info("prahlad debugging103 prompt" + gptPrompt);
             var gptResponse = gptClient.execute();
             var gptBody = gptResponse.getBody();
             var gptResult = JSON.parse(gptBody);
             var suggestion = gptResult.choices[0].message.content;
-            gs.info("prahlad debugging102 final output" + suggestion);
+            gs.info("prahlad debugging103 final output" + suggestion);
             var formattedSuggestion = this.convertNumbersToLinks(suggestion, displayName);
             return formattedSuggestion;
         } catch (e) {
@@ -420,13 +420,13 @@ NBAGeneration.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         <sys_created_by>Prahlad.Gorantla</sys_created_by>
         <sys_created_on>2026-02-24 06:46:05</sys_created_on>
         <sys_id>aa0edff02b9fb690d16df709f291bf34</sys_id>
-        <sys_mod_count>142</sys_mod_count>
+        <sys_mod_count>143</sys_mod_count>
         <sys_name>NBAGeneration</sys_name>
         <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
         <sys_update_name>sys_script_include_aa0edff02b9fb690d16df709f291bf34</sys_update_name>
         <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
-        <sys_updated_on>2026-03-10 10:15:39</sys_updated_on>
+        <sys_updated_on>2026-04-03 12:47:26</sys_updated_on>
     </sys_script_include>
 </record_update>

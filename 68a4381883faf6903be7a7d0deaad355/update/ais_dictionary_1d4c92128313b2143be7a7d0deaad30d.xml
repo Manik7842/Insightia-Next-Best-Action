@@ -8,10 +8,10 @@
         <derived>true</derived>
         <field/>
         <label>Change Request Search Profile Default Spell Check Dictionary</label>
-        <last_derived>2026-04-02 10:26:57</last_derived>
+        <last_derived>2026-04-03 11:26:57</last_derived>
         <locale>en</locale>
         <name>x_ustgl_insighti_0_change_request_search_profile_default_spell_check_dictionary</name>
-        <publish_id>bb42c890-f8d8-45b0-9e38-675005400f87</publish_id>
+        <publish_id>b96398db-f071-4647-898c-a77c9316d087</publish_id>
         <punctuation_sensitive>false</punctuation_sensitive>
         <state>PUBLISHED</state>
         <sys_class_name>ais_dictionary</sys_class_name>

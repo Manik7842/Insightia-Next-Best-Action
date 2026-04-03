@@ -4,28 +4,28 @@
         <auto_refresh>24</auto_refresh>
         <blocked_field/>
         <case_sensitive>false</case_sensitive>
-        <data_source>sc_task</data_source>
+        <data_source>incident</data_source>
         <derived>true</derived>
         <field/>
-        <label>Catalog Task Seach Profile Default Spell Check Dictionary</label>
-        <last_derived>2026-04-03 11:26:58</last_derived>
+        <label>Incident Search Profile Default Spell Check Dictionary</label>
+        <last_derived>2026-04-03 12:34:23</last_derived>
         <locale>en</locale>
-        <name>x_ustgl_insighti_0_catalog_task_seach_profile_default_spell_check_dictionary</name>
-        <publish_id>cd54ea2e-ef5c-4be2-89c6-6102facde3d6</publish_id>
+        <name>x_ustgl_insighti_0_incident_search_profile_default_spell_check_dictionary</name>
+        <publish_id>c58747a4-56b8-4e8f-8023-6d6a15fa11c9</publish_id>
         <punctuation_sensitive>false</punctuation_sensitive>
         <state>PUBLISHED</state>
         <sys_class_name>ais_dictionary</sys_class_name>
         <sys_created_by>Prahlad.Gorantla</sys_created_by>
-        <sys_created_on>2026-02-28 17:12:09</sys_created_on>
-        <sys_id>343752de839f72143be7a7d0deaad32a</sys_id>
+        <sys_created_on>2026-04-03 12:33:54</sys_created_on>
+        <sys_id>7c9d9cd5830847583be7a7d0deaad398</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>x_ustgl_insighti_0_catalog_task_seach_profile_default_spell_check_dictionary</sys_name>
+        <sys_name>x_ustgl_insighti_0_incident_search_profile_default_spell_check_dictionary</sys_name>
         <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
         <sys_policy/>
         <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
-        <sys_update_name>ais_dictionary_343752de839f72143be7a7d0deaad32a</sys_update_name>
+        <sys_update_name>ais_dictionary_7c9d9cd5830847583be7a7d0deaad398</sys_update_name>
         <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
-        <sys_updated_on>2026-02-28 17:12:09</sys_updated_on>
+        <sys_updated_on>2026-04-03 12:33:54</sys_updated_on>
         <type>SPELLCHECK</type>
     </ais_dictionary>
 </record_update>

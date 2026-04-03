@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="DELETE">
+        <action_name>generate_nba</action_name>
+        <active>false</active>
+        <client>true</client>
+        <client_script_v2><![CDATA[function onClick() {
+
+    var incidentSysId = g_form.getUniqueValue();
+	
+    if (!incidentSysId) {
+        return;
+    }
+
+    var ga = new GlideAjax('x_ustgl_insighti_0.generateNextBestAction');
+    ga.addParam('sysparm_name', 'generateNBAT');
+    ga.addParam('sysparm_inc_sys_id', incidentSysId);
+
+    ga.getXMLAnswer(function (response) {
+
+        if (!response) {
+            g_form.addErrorMessage('Failed to generate Next Best Action');
+            return;
+        }
+
+		if (response.startsWith("ERROR:")) {
+            g_form.addErrorMessage(response.replace("ERROR:", ""));
+            return;
+        }
+
+        g_form.setValue('x_ustgl_insighti_0_next_best_actions', response);
+
+        // Save (Workspace + Classic)
+        if (typeof g_form.saveRecord === 'function') {
+            g_form.saveRecord();
+        } else {
+            g_form.save();
+        }
+        g_form.addInfoMessage('Next Best Action generated successfully');
+    });
+}
+]]></client_script_v2>
+        <comments/>
+        <condition>!current.isNewRecord() &amp;&amp; current.state != 6 &amp;&amp; current.state != 7</condition>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_button_v2>true</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>true</form_menu_button_v2>
+        <form_style/>
+        <format_for_configurable_workspace>true</format_for_configurable_workspace>
+        <hint/>
+        <isolate_script>true</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Suggest Action</name>
+        <onclick>onClick();</onclick>
+        <order>100</order>
+        <script><![CDATA[function onClick() {
+
+    var incidentSysId = g_form.getUniqueValue();
+    if (!incidentSysId) {
+        return;
+    }
+
+    var ga = new GlideAjax('x_ustgl_insighti_0.generateNextBestAction');
+    ga.addParam('sysparm_name', 'generateNBAT');
+    ga.addParam('sysparm_inc_sys_id', incidentSysId);
+
+    ga.getXMLAnswer(function(response) {
+
+        if (!response) {
+            g_form.addErrorMessage('Failed to generate Next Best Action');
+            return;
+        }
+
+        if (response.startsWith("ERROR:")) {
+            g_form.addErrorMessage(response.replace("ERROR:", ""));
+            return;
+        }
+
+        g_form.setValue('x_ustgl_insighti_0_next_best_actions', response);
+
+        // Save (Workspace + Classic)
+        if (typeof g_form.saveRecord === 'function') {
+            g_form.saveRecord();
+        } else {
+            g_form.save();
+        }
+        g_form.addInfoMessage('Next Best Action generated successfully');
+
+    });
+}]]></script>
+        <show_insert>true</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>Mosam.ManikSwamy@ust.com</sys_created_by>
+        <sys_created_on>2026-01-28 08:27:42</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2ce5349883faf6903be7a7d0deaad3aa</sys_id>
+        <sys_mod_count>42</sys_mod_count>
+        <sys_name>Suggest Action</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_update_name>sys_ui_action_2ce5349883faf6903be7a7d0deaad3aa</sys_update_name>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-03-03 12:22:29</sys_updated_on>
+        <table>incident</table>
+        <ui11_compatible>false</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</application>
+        <file_path/>
+        <instance_id>878021351bbb7d1c19254089bd4bcba3</instance_id>
+        <instance_name>nowops</instance_name>
+        <name>sys_ui_action_2ce5349883faf6903be7a7d0deaad3aa</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_ui_action"&gt;&lt;sys_ui_action action="INSERT_OR_UPDATE"&gt;&lt;action_name&gt;generate_nba&lt;/action_name&gt;&lt;active&gt;false&lt;/active&gt;&lt;client&gt;true&lt;/client&gt;&lt;client_script_v2&gt;&lt;![CDATA[function onClick() {
+
+    var incidentSysId = g_form.getUniqueValue();
+	
+    if (!incidentSysId) {
+        return;
+    }
+
+    var ga = new GlideAjax('x_ustgl_insighti_0.generateNextBestAction');
+    ga.addParam('sysparm_name', 'generateNBAT');
+    ga.addParam('sysparm_inc_sys_id', incidentSysId);
+
+    ga.getXMLAnswer(function (response) {
+
+        if (!response) {
+            g_form.addErrorMessage('Failed to generate Next Best Action');
+            return;
+        }
+
+		if (response.startsWith("ERROR:")) {
+            g_form.addErrorMessage(response.replace("ERROR:", ""));
+            return;
+        }
+
+        g_form.setValue('x_ustgl_insighti_0_next_best_actions', response);
+
+        // Save (Workspace + Classic)
+        if (typeof g_form.saveRecord === 'function') {
+            g_form.saveRecord();
+        } else {
+            g_form.save();
+        }
+        g_form.addInfoMessage('Next Best Action generated successfully');
+    });
+}
+]]&gt;&lt;/client_script_v2&gt;&lt;comments/&gt;&lt;condition&gt;!current.isNewRecord() &amp;amp;&amp;amp; current.state != 6 &amp;amp;&amp;amp; current.state != 7&lt;/condition&gt;&lt;form_action&gt;true&lt;/form_action&gt;&lt;form_button&gt;true&lt;/form_button&gt;&lt;form_button_v2&gt;true&lt;/form_button_v2&gt;&lt;form_context_menu&gt;false&lt;/form_context_menu&gt;&lt;form_link&gt;false&lt;/form_link&gt;&lt;form_menu_button_v2&gt;true&lt;/form_menu_button_v2&gt;&lt;form_style/&gt;&lt;format_for_configurable_workspace&gt;true&lt;/format_for_configurable_workspace&gt;&lt;hint/&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;list_action&gt;false&lt;/list_action&gt;&lt;list_banner_button&gt;false&lt;/list_banner_button&gt;&lt;list_button&gt;false&lt;/list_button&gt;&lt;list_choice&gt;false&lt;/list_choice&gt;&lt;list_context_menu&gt;false&lt;/list_context_menu&gt;&lt;list_link&gt;false&lt;/list_link&gt;&lt;list_save_with_form_button&gt;false&lt;/list_save_with_form_button&gt;&lt;list_style/&gt;&lt;messages/&gt;&lt;name&gt;Suggest Action&lt;/name&gt;&lt;onclick&gt;onClick();&lt;/onclick&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[function onClick() {
+
+    var incidentSysId = g_form.getUniqueValue();
+    if (!incidentSysId) {
+        return;
+    }
+
+    var ga = new GlideAjax('x_ustgl_insighti_0.generateNextBestAction');
+    ga.addParam('sysparm_name', 'generateNBAT');
+    ga.addParam('sysparm_inc_sys_id', incidentSysId);
+
+    ga.getXMLAnswer(function(response) {
+
+        if (!response) {
+            g_form.addErrorMessage('Failed to generate Next Best Action');
+            return;
+        }
+
+        if (response.startsWith("ERROR:")) {
+            g_form.addErrorMessage(response.replace("ERROR:", ""));
+            return;
+        }
+
+        g_form.setValue('x_ustgl_insighti_0_next_best_actions', response);
+
+        // Save (Workspace + Classic)
+        if (typeof g_form.saveRecord === 'function') {
+            g_form.saveRecord();
+        } else {
+            g_form.save();
+        }
+        g_form.addInfoMessage('Next Best Action generated successfully');
+
+    });
+}]]&gt;&lt;/script&gt;&lt;show_insert&gt;true&lt;/show_insert&gt;&lt;show_multiple_update&gt;false&lt;/show_multiple_update&gt;&lt;show_query&gt;false&lt;/show_query&gt;&lt;show_update&gt;true&lt;/show_update&gt;&lt;sys_class_name&gt;sys_ui_action&lt;/sys_class_name&gt;&lt;sys_created_by&gt;Mosam.ManikSwamy@ust.com&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-01-28 08:27:42&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;2ce5349883faf6903be7a7d0deaad3aa&lt;/sys_id&gt;&lt;sys_mod_count&gt;42&lt;/sys_mod_count&gt;&lt;sys_name&gt;Suggest Action&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0"&gt;68a4381883faf6903be7a7d0deaad355&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Insightia (NBA)"&gt;68a4381883faf6903be7a7d0deaad355&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_action_2ce5349883faf6903be7a7d0deaad3aa&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;Prahlad.Gorantla&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-03-03 12:22:29&lt;/sys_updated_on&gt;&lt;table&gt;incident&lt;/table&gt;&lt;ui11_compatible&gt;false&lt;/ui11_compatible&gt;&lt;ui16_compatible&gt;false&lt;/ui16_compatible&gt;&lt;/sys_ui_action&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1500397502</payload_hash>
+        <record_name>Suggest Action</record_name>
+        <reverted_from/>
+        <source>89fbd7f02b9fb690d16df709f291bf11</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-03-03 12:22:29</sys_created_on>
+        <sys_id>13a1b0572b977614d16df709f291bfc2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19cb3a659440000001</sys_recorded_at>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-03-03 12:22:29</sys_updated_on>
+        <type>UI Action</type>
+        <update_guid>1fa1b057ee977614884c681f33e3b0c0</update_guid>
+        <update_guid_history>1fa1b057ee977614884c681f33e3b0c0:1500397502,9a917cd36a977614b553dbd171c57602:1785922923,aa813c179b977614959751e5299e7e19:1500397502,ac52abf49fdfb6901eb74fce10174f5b:1785922923,a4d16774d8dfb6901cb2b8361b51f975:-625173077,60389ff4815fb690aafb6570918f1c72:1785922923,dcf927ec649bf290e3ef56cdc5a1575f:1149557477,3059272097dbf2908daff01db50fc623:-1641075101,5abacfe46357f290271f81abdb67a7be:1432035574,9f910484e41fba50ffbf5418d277b539:-1641075101,8947fbab9f8bf6504bbd2f67bfeabe6e:-1428957585,36b6f36b1b8bf6506dc854de7a91a6bb:-1928518018,3be73d01224bf69402d3d2ddcb38eab3:-52985504,5f77adb8e38336947b55622683c653c2:-2088884749,7f556db0258336944e05bd5586a8c7c4:-52985504,51256970dd833694502e7230eac13e65:-2088884749,e3e46d30b783369490c11a8c226a0a4f:-52985504,f5af85f0004ff294211673af5939198d:-2088884749,55cb01341b0ff29449b270c430597bfe:-52985504,109bf30763b2fe1472b743d765a4fa5d:709946127,c6ae89f241f67a141709ca08391e3abe:-1579684350,c8405e2893323e9044e65fb4409ea28b:-169554378,307425ec383efa90d3911813e07c3d08:-1320529282,96d91de8c2bafa9016767b458b5593ed:902355793,2484d9a83b7afa90663971682922fb3c:-1320529282,66445d68b77afa90a3ccd09aeec3cf71:-558072294,01d391289f7afa90ff0b63c96189e764:256328613,be2fc524103afa90e9f0c3c4b76a7cf9:-946728297,038ecde0243afa903008cfeff06b7257:278353206,366e09e0e63afa90f80c6b588d0c8e1a:228187159,f4fd4960303afa90eb4ba6463a18c0fb:278665951,f8beb1d014ba3a901a87f25f9821bd34:-1558489596,979e359c117a3a90c56805b7105a0541:2140813073,891d755c977a3a90ed10a24bb186b381:-1558489596,a7bcfdd84e7a3a906fd29cb5c51e777c:-1429840057,b61e85d8d4323a9065719eff64e4e889:90833034,f3ad0d1843323a90ddd7fbcda9920843:97828096,e89d0198b2323a904e2fa9618a591105:1892002555,bc4dc594c0323a90d92c6623e648ffde:-1612998114,e40a41dcf3fef6904fcd2e2ad86b95c7:-302370094,d5c9091c1ffef690cbf7c34acb01b317:872191557,1a6b385ccc3ef69054e0479482727233:1664254651,a0e5f41c96faf690b1ddbd35918d2300:-1692553235</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>Prahlad.Gorantla</sys_created_by>
+        <sys_created_on>2026-04-03 10:28:33</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_action">sys_ui_action</sys_db_object>
+        <sys_id>415ce5629b7a441f988d212bf704c051</sys_id>
+        <sys_metadata>2ce5349883faf6903be7a7d0deaad3aa</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Suggest Action</sys_name>
+        <sys_package display_value="Insightia (NBA)" source="x_ustgl_insighti_0">68a4381883faf6903be7a7d0deaad355</sys_package>
+        <sys_parent display_value="Incident">02d9e935ebb331104d66f624dad0cd7e</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Insightia (NBA)">68a4381883faf6903be7a7d0deaad355</sys_scope>
+        <sys_scope_delete display_value="">99772c5f9ccb49dea7863377c4777811</sys_scope_delete>
+        <sys_update_name>sys_ui_action_2ce5349883faf6903be7a7d0deaad3aa</sys_update_name>
+        <sys_update_version display_value="sys_ui_action_2ce5349883faf6903be7a7d0deaad3aa">13a1b0572b977614d16df709f291bfc2</sys_update_version>
+        <sys_updated_by>Prahlad.Gorantla</sys_updated_by>
+        <sys_updated_on>2026-04-03 10:28:33</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
